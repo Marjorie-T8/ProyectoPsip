@@ -1,4 +1,4 @@
-package com.uisrael.apipsip.infraestructura.repositorios;
+package com.uisrael.apipsip.infraestructura.respositorios;
 
 import com.uisrael.apipsip.dominio.entidades.AnexoDocumento;
 import org.springframework.data.jpa.repository.JpaRepository;
