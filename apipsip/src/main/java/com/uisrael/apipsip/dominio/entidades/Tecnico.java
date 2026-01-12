@@ -11,7 +11,7 @@ public class Tecnico implements Serializable {
 	private final String telefono;
 	private final boolean activo;
 
-	private Tecnico(int idTecnico, String nombre, String email, String telefono, boolean activo) {
+	public Tecnico(int idTecnico, String nombre, String email, String telefono, boolean activo) {
 		this.idTecnico = idTecnico;
 		this.nombre = nombre;
 		this.email = email;

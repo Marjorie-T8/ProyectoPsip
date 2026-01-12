@@ -12,7 +12,7 @@ public class Equipo implements Serializable {
 	private final String numSerie;
 	private final String descripcion;
 
-	private Equipo(int idEquipo, String marca, String modelo, String numSerie, String descripcion) {
+public Equipo(int idEquipo, String marca, String modelo, String numSerie, String descripcion) {
 		this.idEquipo = idEquipo;
 		this.marca = marca;
 		this.modelo = modelo;

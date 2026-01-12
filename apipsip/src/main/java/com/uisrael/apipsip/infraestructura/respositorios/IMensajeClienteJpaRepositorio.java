@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IMensajeClienteRepository extends JpaRepository<MensajeCliente, Long> {
+public interface IMensajeClienteJpaRepositorio extends JpaRepository<MensajeCliente, Long> {
 }

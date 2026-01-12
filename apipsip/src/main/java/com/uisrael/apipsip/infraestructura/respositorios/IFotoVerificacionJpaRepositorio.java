@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IFotoVerificacionRepository extends JpaRepository<FotoVerificacion, Long> {
+public interface IFotoVerificacionJpaRepositorio extends JpaRepository<FotoVerificacion, Long> {
 }

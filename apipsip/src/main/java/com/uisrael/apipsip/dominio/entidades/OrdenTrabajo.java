@@ -21,7 +21,7 @@ public class OrdenTrabajo implements Serializable {
 	private final String descripcionTrabajo;
 	private final String observaciones;
 
-	private OrdenTrabajo(
+	public OrdenTrabajo(
 			int idOrden,
 			String codigo,
 			Cliente cliente,

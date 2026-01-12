@@ -10,7 +10,7 @@ public class TipoServicio implements Serializable {
 	private final String nombre;
 	private final String descripcion;
 
-	private TipoServicio(int idTipo, String nombre, String descripcion) {
+	public TipoServicio(int idTipo, String nombre, String descripcion) {
 		this.idTipo = idTipo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;

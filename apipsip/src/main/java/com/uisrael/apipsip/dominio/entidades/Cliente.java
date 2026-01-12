@@ -13,7 +13,7 @@ public class Cliente implements Serializable {
 	private final String direccion;
 	private final boolean estado;
 	
-	private Cliente(int idCliente, String nombre, String email, String telefono, String direccion, boolean estado) {
+	public Cliente(int idCliente, String nombre, String email, String telefono, String direccion, boolean estado) {
 		super();
 		this.idCliente = idCliente;
 		this.nombre = nombre;
