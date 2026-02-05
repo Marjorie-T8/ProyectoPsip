@@ -12,6 +12,7 @@ public interface IEquipoRepositorio {
 	Optional<Equipo> buscarPorId(int id);
 	List<Equipo> listarTodos();
 	void eliminar(int id);
-
+	List<Equipo> listarPorCliente(int idCliente);
+	Equipo actualizar(int id, Equipo equipo);
 }
 

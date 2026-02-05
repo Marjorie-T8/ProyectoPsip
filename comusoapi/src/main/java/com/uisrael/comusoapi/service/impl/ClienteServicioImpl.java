@@ -2,11 +2,15 @@ package com.uisrael.comusoapi.service.impl;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import reactor.core.publisher.Mono;
 
 import com.uisrael.comusoapi.modelo.dto.request.ClienteRequestDTO;
+
 import com.uisrael.comusoapi.modelo.dto.response.ClienteResponseDTO;
 import com.uisrael.comusoapi.service.IClienteServicio;
 
@@ -23,66 +27,66 @@ public class ClienteServicioImpl implements IClienteServicio{
 
     @Override
     public List<ClienteResponseDTO> listarCliente() {
-        return clienteWeb.get().uri("/cliente").retrieve().bodyToFlux(ClienteResponseDTO.class).collectList().block();
+        return clienteWeb.get()
+                .uri("/cliente")
+                .retrieve()
+                .bodyToFlux(ClienteResponseDTO.class)
+                .collectList()
+                .block();
     }
 
-   
     @Override
-    public ClienteRequestDTO crearCliente(ClienteRequestDTO dto) {
-        if (dto.getNombre() == null || dto.getNombre().trim().isEmpty()) {
-            throw new RuntimeException("El nombre es obligatorio");
+    public ClienteResponseDTO crearCliente(ClienteRequestDTO dto) {
+       
+        if (dto.getIdCliente() != null && dto.getIdCliente() > 0) {
+            actualizarCliente(dto.getIdCliente(), dto);
+            return null; 
         }
 
+       
         try {
             return clienteWeb.post()
-                      .uri("/cliente")
-                      .header("Prefer", "return=representation")
-                      .bodyValue(dto)
-                      .retrieve()
-                      .bodyToMono(ClienteRequestDTO.class)
-                      .block();
-        } catch (org.springframework.web.reactive.function.client.WebClientResponseException e) {
-            
-            java.util.Map<?, ?> map = e.getResponseBodyAs(java.util.Map.class);
-            
-            if (map != null && (map.containsKey("id_cliente") || map.containsKey("idCliente"))) {
-                ClienteRequestDTO clienteRecuperado = new ClienteRequestDTO();
-                
-                Object id = map.get("id_cliente") != null ? map.get("id_cliente") : map.get("idCliente");
-                clienteRecuperado.setIdCliente(Integer.parseInt(id.toString()));
-                clienteRecuperado.setNombre(dto.getNombre());
-                return clienteRecuperado; 
-            }
-            throw e; 
+                    .uri("/cliente")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .bodyValue(dto)
+                    .retrieve()
+                    .onStatus(HttpStatusCode::isError, response -> Mono.empty())
+                    .bodyToMono(ClienteResponseDTO.class)
+                    .block();
+        } catch (Exception e) {
+            System.out.println("Error al crear cliente: " + e.getMessage());
+            return null;
         }
     }
-    @Override
-    public ClienteResponseDTO buscarClientePorId(int id) {
+
+    
+    public ClienteResponseDTO buscarClientePorId(int id) { 
         return clienteWeb.get()
-                .uri("/cliente/{id}", id) // Limpio y directo
+                .uri("/cliente/{id}", id)
                 .retrieve()
                 .bodyToMono(ClienteResponseDTO.class)
                 .block();
     }
 
     @Override
-    public void actualizarCliente(ClienteRequestDTO dto) {
+    public void actualizarCliente(int id, ClienteRequestDTO dto) {
         clienteWeb.put()
-                .uri("/cliente/{id}", dto.getIdCliente())
+                .uri("/cliente/{id}", id)
                 .bodyValue(dto)
                 .retrieve()
                 .toBodilessEntity()
                 .block();
     }
 
+
+
     @Override
     public void eliminarCliente(int id) {
         clienteWeb.delete()
-                .uri("/cliente/{id}", id) 
+                .uri("/cliente/{id}", id)
                 .retrieve()
                 .toBodilessEntity()
                 .block();
     }
+    
 }
-
-

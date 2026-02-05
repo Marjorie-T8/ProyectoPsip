@@ -16,9 +16,6 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	private final IClienteJpaRepositorio jpaRepository;
 	private final IClienteJpaMapper entityMapper;
 
-	
-
-
 	public ClienteRepositorioImpl(IClienteJpaRepositorio jpaRepository, IClienteJpaMapper entityMapper) {
 		super();
 		this.jpaRepository = jpaRepository;
@@ -48,6 +45,18 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	public void eliminar(int id) {
 		jpaRepository.deleteById(id);
 		
+	}
+	
+
+	@Override
+	public Cliente actualizar(int id, Cliente cliente) {
+	    
+	    ClienteJpa entity = entityMapper.toEntity(cliente);
+	  
+	    entity.setIdCliente(id); 
+	    ClienteJpa guardado = jpaRepository.save(entity);
+	    
+	    return entityMapper.toDomain(guardado);
 	}
 
 }

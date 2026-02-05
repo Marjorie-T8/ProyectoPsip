@@ -34,5 +34,5 @@ public class ClienteJpa implements Serializable{
     @Column(nullable = false)
     private String direccion;
 
-    private boolean estado;
+    private Boolean estado= true; 
 }

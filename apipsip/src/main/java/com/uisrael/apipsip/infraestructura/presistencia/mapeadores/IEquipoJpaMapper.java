@@ -8,8 +8,9 @@ import com.uisrael.apipsip.infraestructura.presistencia.jpa.EquipoJpa;
 
 @Mapper (componentModel = "spring")
 public interface IEquipoJpaMapper {
-	Equipo toDomain(EquipoJpa entity);
 	
+	Equipo toDomain(EquipoJpa entity);
+
 	EquipoJpa toEntity(Equipo equipo);
 
 }

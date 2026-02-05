@@ -10,5 +10,5 @@ public interface IEquipoUseCase {
     List<Equipo> listar();
     void eliminar(int id);
     Equipo actualizar(int id, Equipo equipo);
-
+    List<Equipo> listarPorCliente(int idCliente);
 }

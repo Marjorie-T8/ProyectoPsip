@@ -6,9 +6,14 @@ import com.uisrael.comusoapi.modelo.dto.request.ClienteRequestDTO;
 import com.uisrael.comusoapi.modelo.dto.response.ClienteResponseDTO;
 
 public interface IClienteServicio {
-public List<ClienteResponseDTO> listarCliente();
-public ClienteRequestDTO crearCliente(ClienteRequestDTO dto);
-public ClienteResponseDTO buscarClientePorId(int id);
-public void actualizarCliente(ClienteRequestDTO dto);
-public void eliminarCliente(int id);
+
+    List<ClienteResponseDTO> listarCliente();
+
+    ClienteResponseDTO crearCliente(ClienteRequestDTO clienteDto);
+
+    ClienteResponseDTO buscarClientePorId(int id);
+
+    void actualizarCliente(int id, ClienteRequestDTO dto);  
+
+    void eliminarCliente(int id);
 }

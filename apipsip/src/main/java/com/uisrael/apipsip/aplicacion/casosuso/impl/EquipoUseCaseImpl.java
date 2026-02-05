@@ -41,4 +41,10 @@ public class EquipoUseCaseImpl implements IEquipoUseCase {
             .map(existente -> repositorio.guardar(equipo))
             .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
     }
+
+    @Override
+    public List<Equipo> listarPorCliente(int idCliente) {
+   
+        return repositorio.listarPorCliente(idCliente);
+    }
 }

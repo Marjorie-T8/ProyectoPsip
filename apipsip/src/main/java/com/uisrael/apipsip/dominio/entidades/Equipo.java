@@ -54,5 +54,14 @@ public String getDescripcion() {
 	return descripcion;
 }
 
+
+@Override
+public String toString() {
+	return "Equipo [idEquipo=" + idEquipo + ", idCliente=" + idCliente + ", marca=" + marca + ", modelo=" + modelo
+			+ ", numSerie=" + numSerie + ", descripcion=" + descripcion + "]";
+}
+
+
+
 	
 }

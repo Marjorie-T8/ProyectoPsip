@@ -13,7 +13,7 @@ public class ClienteResponseDTO {
 
 	private String direccion;
 
-	private boolean estado;
+	private Boolean estado;
 
 	public int getIdCliente() {
 		return idCliente;
@@ -55,13 +55,14 @@ public class ClienteResponseDTO {
 		this.direccion = direccion;
 	}
 
-	public boolean isEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+
 	
 
 }

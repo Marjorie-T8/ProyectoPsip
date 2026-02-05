@@ -46,4 +46,20 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
     public void eliminar(int id) {
         jpaRepository.deleteById(id);
     }
+
+    @Override
+    public List<Equipo> listarPorCliente(int idCliente) {
+      
+        return jpaRepository.findById(idCliente)
+                .stream()
+                .map(entityMapper::toDomain)
+                .toList();
+    }
+    @Override
+    public Equipo actualizar(int id, Equipo equipo) {
+        EquipoJpa entity = entityMapper.toEntity(equipo);
+      
+        entity.setIdEquipo(id); 
+        return entityMapper.toDomain(jpaRepository.save(entity));
+    }
 }

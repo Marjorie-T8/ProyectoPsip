@@ -48,8 +48,15 @@ public class EquipoServicioImpl implements IEquipoServicio {
 
     @Override
     public List<EquipoResponseDTO> listarEquiposPorCliente(int idCliente) {
+        // IMPORTANTE: Cambiamos "id_cliente" por "idCliente" (Exactamente como tu Entidad)
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/equipo").queryParam("id_cliente", "eq." + idCliente).build())
-                .retrieve().bodyToFlux(EquipoResponseDTO.class).collectList().block();
+                .uri(uriBuilder -> uriBuilder
+                    .path("/equipo")
+                    .queryParam("idCliente", "eq." + idCliente) 
+                    .build())
+                .retrieve()
+                .bodyToFlux(EquipoResponseDTO.class)
+                .collectList()
+                .block();
     }
 }

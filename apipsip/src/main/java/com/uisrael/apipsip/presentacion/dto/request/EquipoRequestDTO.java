@@ -2,6 +2,8 @@ package com.uisrael.apipsip.presentacion.dto.request;
 
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -9,7 +11,7 @@ import lombok.Data;
 public class EquipoRequestDTO {
 
     private int idEquipo; 
-   
+    @JsonProperty("idcliente")
     private int idCliente; 
 
     @NotBlank(message = "La marca es obligatoria")

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="plantilla/plantillaui"> <head>
+    <title>Equipos del Cliente</title>
+</head>
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-md-flex align-items-center mb-3">
+                <div>
+                    <h4 class="card-title">Equipos Asignados al Cliente</h4>
+                    
+                </div>
+                <div class="ms-auto">
+                    <a th:href="@{/equipo/nuevo(idCliente=${idCliente})}" class="btn btn-success text-white">
+                        <i class="mdi mdi-plus"></i> Crear Nuevo Equipo
+                    </a>
+                </div>
+            </div>
+						<table class="table">
+						    <thead class="thead-dark">
+						        <tr>
+						            <th scope="col">ID Equipo</th>
+						            <th scope="col">Marca</th>
+						            <th scope="col">Modelo</th>
+						            <th scope="col"></th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr th:each="e : ${listaequipos}">
+						            <td th:text="${e.idEquipo}"></td>
+						            <td th:text="${e.marca}"></td>
+						            <td th:text="${e.modelo}"></td>
+						            <td>
+						               <a th:href="@{/equipo/editar/{id}(id=${e.idEquipo})}" 
+							                   class="btn btn-sm btn-primary">
+							                   ✎
+							                </a>
+						                
+						                <a th:href="@{/equipo/eliminar/{id}(id=${e.idEquipo})}" 
+						                   class="btn btn-sm btn-danger"
+						                   onclick="return confirm('¿Seguro que deseas eliminar este equipo?');">
+						                   ✘
+						                </a>
+									</td>
+						        </tr>
+						    </tbody>
+						</table>
+            
+            </div>
+            
+            <div class="mt-3">
+                <a th:href="@{/cliente/listar}" class="btn btn-secondary">
+                    <i class="mdi mdi-arrow-left"></i> Volver a Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

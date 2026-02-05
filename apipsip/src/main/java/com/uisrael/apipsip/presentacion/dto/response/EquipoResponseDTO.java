@@ -1,16 +1,17 @@
 package com.uisrael.apipsip.presentacion.dto.response;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EquipoResponseDTO {
 	
 	private  int idEquipo;
+	@JsonProperty("idcliente")
 	  private int idCliente; 
 	
 	private  String marca;
 	
 	private  String modelo;
-
+	@JsonProperty("numserie")
 	private  String numSerie;
 	
 	private String descripcion;

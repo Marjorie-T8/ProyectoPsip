@@ -10,7 +10,7 @@ public class ClienteRequestDTO {
 
 	
 	
-    private int idCliente;
+	private Integer idCliente;
 
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
@@ -24,6 +24,6 @@ public class ClienteRequestDTO {
     @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
 
-    private boolean estado;
+    private Boolean estado;
 }
 

@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.IClienteUseCase;
@@ -34,19 +35,27 @@ public class ClienteControlador {
 		}
 	
 	@PostMapping
-	@ResponseStatus
 	public ClienteResponseDTO crear(@Valid @RequestBody ClienteRequestDTO request){
-		return mapper.toResponseDto(clienteUseCase.crear(mapper.toDomain(request)));
-	
+	    
+	    return mapper.toResponseDto(clienteUseCase.crear(mapper.toDomain(request)));
 	}
 	 @DeleteMapping ("{id}")
 	 public ResponseEntity<Void>  eliminar(@PathVariable int id) {
 		 clienteUseCase.eliminar(id);
 		 return ResponseEntity.noContent().build();
 	 }
-
-
-
+	 @GetMapping("/{id}")
+	 public ClienteResponseDTO buscarPorId(@PathVariable int id) {
+	    
+	     return mapper.toResponseDto(clienteUseCase.obtenerPorId(id));
+	 }
+	 @PutMapping("/{id}")
+	 public ClienteResponseDTO actualizar(@PathVariable int id, @Valid @RequestBody ClienteRequestDTO request) {
+	   
+	     return mapper.toResponseDto(
+	         clienteUseCase.actualizar(id, mapper.toDomain(request))
+	     );
+	 }
 }
 	
 
