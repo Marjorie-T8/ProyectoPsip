@@ -31,22 +31,17 @@ public class EquipoControlador {
         this.mapper = mapper;
     }
 
-
     @GetMapping
     public List<EquipoResponseDTO> listar(@RequestParam(required = false) String idCliente) {
         
         if (idCliente != null && idCliente.contains("eq.")) {
-            int id = Integer.parseInt(idCliente.replace("eq.", ""));
-            
-            
+            int id = Integer.parseInt(idCliente.replace("eq.", ""));      
             return equipoUseCase.listarPorCliente(id) 
                     .stream()
                     .map(mapper::toResponseDto)
                     .toList();
         }
-        
-       
-        return equipoUseCase.listar()
+       return equipoUseCase.listar()
                 .stream()
                 .map(mapper::toResponseDto)
                 .toList();
@@ -58,9 +53,24 @@ public class EquipoControlador {
         );
     }
 
+ 
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipoResponseDTO> obtenerPorId(@PathVariable int id) {
+        var equipo = equipoUseCase.obtenerPorId(id);
+        return ResponseEntity.ok(mapper.toResponseDto(equipo));
+    }
+ 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable int id) {
         equipoUseCase.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/cliente/{idCliente}")
+    public List<EquipoResponseDTO> listarPorCliente(@PathVariable int idCliente) {
+        return equipoUseCase.listarPorCliente(idCliente)
+                .stream()
+                .map(mapper::toResponseDto)
+                .toList();
     }
 }

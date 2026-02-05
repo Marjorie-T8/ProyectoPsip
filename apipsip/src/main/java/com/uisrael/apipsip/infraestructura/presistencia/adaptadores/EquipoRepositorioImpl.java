@@ -49,8 +49,8 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
 
     @Override
     public List<Equipo> listarPorCliente(int idCliente) {
-      
-        return jpaRepository.findById(idCliente)
+       
+        return jpaRepository.findByIdCliente(idCliente) 
                 .stream()
                 .map(entityMapper::toDomain)
                 .toList();
@@ -62,4 +62,5 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
         entity.setIdEquipo(id); 
         return entityMapper.toDomain(jpaRepository.save(entity));
     }
+    
 }

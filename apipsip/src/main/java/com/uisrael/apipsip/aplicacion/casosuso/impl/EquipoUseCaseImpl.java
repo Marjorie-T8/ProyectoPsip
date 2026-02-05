@@ -44,7 +44,6 @@ public class EquipoUseCaseImpl implements IEquipoUseCase {
 
     @Override
     public List<Equipo> listarPorCliente(int idCliente) {
-   
         return repositorio.listarPorCliente(idCliente);
     }
 }
