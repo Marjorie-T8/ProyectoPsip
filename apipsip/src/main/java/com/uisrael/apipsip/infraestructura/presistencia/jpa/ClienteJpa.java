@@ -19,7 +19,7 @@ public class ClienteJpa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "idcliente")
+	 @Column(name = "idcliente") 
     private int idCliente;
 
     @Column(length = 80, nullable = false)

@@ -1,7 +1,5 @@
 package com.uisrael.apipsip.presentacion.dto.request;
 
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
