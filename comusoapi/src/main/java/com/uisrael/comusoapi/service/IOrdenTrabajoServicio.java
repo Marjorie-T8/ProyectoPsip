@@ -20,6 +20,7 @@ public interface IOrdenTrabajoServicio {
 
 
     void eliminarOrdenTrabajo(int id);
+    OrdenTrabajoResponseDTO buscarPorCodigoTicket(String codigo);
 }
 
 

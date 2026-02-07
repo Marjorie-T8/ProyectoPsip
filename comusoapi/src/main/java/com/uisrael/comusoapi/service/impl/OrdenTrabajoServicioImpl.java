@@ -65,6 +65,13 @@ public class OrdenTrabajoServicioImpl implements IOrdenTrabajoServicio {
                 .bodyToMono(OrdenTrabajoResponseDTO.class)
                 .block();
     }
-
+    @Override
+  
+    public OrdenTrabajoResponseDTO buscarPorCodigoTicket(String codigo) {
+        return listarOrdenesTrabajo().stream()
+                .filter(o -> o.getCodigoticket().equals(codigo))
+                .findFirst()
+                .orElse(null);
+    }
    
 }

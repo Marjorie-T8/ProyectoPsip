@@ -106,5 +106,18 @@ public class OrdenControlador {
         
         return "orden/verorden";
     }
+    @GetMapping("/consultar")
+    public String consultarToken(@RequestParam String token, @RequestParam(required = false) String rol, Model model) {
+        model.addAttribute("rol", rol);
+        OrdenTrabajoResponseDTO orden = servicioOrden.buscarPorToken(token);
+        
+        if (orden == null) {
+            model.addAttribute("error", "No se encontró ninguna orden con el código ingresado.");
+            return "solicitud/revisartoken"; // Regresa a la misma página con el error
+        }
+        
+        model.addAttribute("orden", orden);
+        return "orden/verorden"; // Si lo encuentra, lo manda directo al detalle
+    }
 }
    

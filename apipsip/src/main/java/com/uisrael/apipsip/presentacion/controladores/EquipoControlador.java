@@ -49,11 +49,11 @@ public class EquipoControlador {
     @PostMapping
     public EquipoResponseDTO crear(@Valid @RequestBody EquipoRequestDTO request) {
         return mapper.toResponseDto(
-                equipoUseCase.crear(mapper.toDomain(request))
+            equipoUseCase.crear(
+                mapper.toDomain(request)
+            )
         );
     }
-
- 
     @GetMapping("/{id}")
     public ResponseEntity<EquipoResponseDTO> obtenerPorId(@PathVariable int id) {
         var equipo = equipoUseCase.obtenerPorId(id);

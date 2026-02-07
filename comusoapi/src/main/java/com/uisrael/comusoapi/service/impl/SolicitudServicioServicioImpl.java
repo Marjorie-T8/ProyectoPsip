@@ -27,48 +27,58 @@ public class SolicitudServicioServicioImpl implements ISolicitudServicioServicio
     }
 
     @Override
-    public String agendar(int idEquipo, String fecha, String hora, String modalidad) {
-        // 1️⃣ Validación del ID del equipo
-        if (idEquipo <= 0) {
-            throw new IllegalArgumentException("El ID del equipo es inválido: " + idEquipo);
-        }
-
-        // 2️⃣ Obtener el equipo usando el servicio
+    public String agendar(int idEquipo, String fecha, String hora, String modalidad,
+                          String direccion, String descripcion) {
+        // 1. Obtener el equipo para sacar el ID del cliente
         EquipoResponseDTO equipo = servicioEquipo.buscarEquipoPorId(idEquipo);
         int idClienteCalculado = equipo.getIdcliente();
 
-        // 3️⃣ Crear el DTO de solicitud
+        // 2. Crear el DTO de solicitud
         SolicitudServicioRequestDTO dto = new SolicitudServicioRequestDTO();
         dto.setIdequipo(idEquipo);
         dto.setIdcliente(idClienteCalculado);
-
-        // 4️⃣ Generar el ticket
-        String token = "TKT-" + java.util.UUID.randomUUID()
-                .toString().substring(0, 5).toUpperCase();
-        dto.setCodigoticket(token);
+        dto.setModalidadatencion(modalidad);
+        dto.setDireccionservicio(direccion);
         dto.setFechacita(java.time.LocalDate.parse(fecha));
         dto.setHoracita(java.time.LocalTime.parse(hora));
-        dto.setModalidadatencion(modalidad);
         dto.setEstado("PENDIENTE");
 
-        // 5️⃣ Enviar la solicitud al API
-        webClient.post()
-                .uri("/api/solicitud")
+        // 3. Generar el ticket
+        String token = "TKT-" + java.util.UUID.randomUUID().toString().substring(0, 5).toUpperCase();
+        dto.setCodigoticket(token);
+
+        // 4. Imprimir el JSON que se envía (para debug - puedes quitar después)
+        try {
+            String json = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(dto);
+            System.out.println("JSON enviado al servidor: " + json);
+        } catch (Exception e) {
+            System.err.println("Error al imprimir JSON: " + e.getMessage());
+        }
+
+        // 5. Llamar al backend (ruta correcta)
+        SolicitudServicioResponseDTO respuesta = webClient.post()
+                .uri("/solicitud")
                 .bodyValue(dto)
                 .retrieve()
-                .bodyToMono(Void.class)
+                .bodyToMono(SolicitudServicioResponseDTO.class)
                 .block();
 
+        // 6. Mostrar respuesta (opcional)
+        System.out.println("Respuesta del servidor - Ticket: " + respuesta.getCodigoticket());
+        System.out.println("Respuesta del servidor - ID: " + respuesta.getIdsolicitud());
+
+        // Retornamos el token generado localmente (como en tu lógica original)
         return token;
     }
 
     @Override
     public List<SolicitudServicioResponseDTO> listarTodas() {
         return webClient.get()
-                .uri("/api/solicitud")
+                .uri("/solicitud")
                 .retrieve()
                 .bodyToFlux(SolicitudServicioResponseDTO.class)
                 .collectList()
                 .block();
     }
 }
+

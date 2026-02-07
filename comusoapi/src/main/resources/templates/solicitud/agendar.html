@@ -15,51 +15,45 @@
 
                 <h4 class="card-title text-primary">AGENDAMIENTO DE SERVICIO</h4>
                 <hr>
-                 <p>ID del equipo recibido: <span th:text="${idequipo}"></span></p>
-<form th:action="@{/solicitud/finalizar}" method="post">
-    <input type="hidden" name="idequipo" th:value="${idequipo}" />
+                <p class="mb-4">Vas a agendar el servicio para el equipo ID: <span class="badge bg-info" th:text="${idequipo}"></span></p>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label class="form-label fw-bold">Fecha de Cita</label>
-            <input type="date" name="fechacita" class="form-control" required />
-        </div>
-        <div class="col-md-6">
-            <label class="form-label fw-bold">Hora de Cita</label>
-            <input type="time" name="horacita" class="form-control" required />
-        </div>
-    </div>
+                <form th:action="@{/solicitud/finalizar}" method="post">
+                    <input type="hidden" name="idequipo" th:value="${idequipo}" />
 
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <label class="form-label fw-bold">Modalidad de Atención</label>
-            <select name="modalidadatencion" class="form-select" required>
-                <option value="">Seleccione</option>
-                <option value="PRESENCIAL">Presencial</option>
-                <option value="REMOTO">Remoto</option>
-            </select>
-        </div>
-    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Fecha de Cita</label>
+                            <input type="date" name="fechacita" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Hora de Cita</label>
+                            <input type="time" name="horacita" class="form-control" required />
+                        </div>
+                    </div>
 
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <label class="form-label fw-bold">Dirección del Servicio</label>
-            <input type="text" name="direccionservicio" class="form-control" />
-        </div>
-    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Modalidad de Atención</label>
+                            <select name="modalidadatencion" class="form-select" required>
+                                <option value="">Seleccione</option>
+                                <option value="PRESENCIAL">Presencial</option>
+                                <option value="REMOTO">Remoto</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <label class="form-label fw-bold">Descripción / Observaciones</label>
-            <textarea name="descripcion" class="form-control" rows="3"></textarea>
-        </div>
-    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Dirección del Servicio</label>
+                            <input type="text" name="direccionservicio" class="form-control" placeholder="Ingrese la dirección física o enlace de reunión" />
+                        </div>
+                    </div>
 
-    <div class="text-end">
-        <button type="submit" class="btn btn-success">FINALIZAR Y VER TICKET</button>
-    </div>
-</form>
-
+                    <div class="text-end">
+                        <a th:href="@{/solicitud/agendar(idEquipo=${idequipo})}" class="btn btn-light">Limpiar</a>
+                        <button type="submit" class="btn btn-success">FINALIZAR Y VER TICKET</button>
+                    </div>
+                </form>
 
             </div>
         </div>

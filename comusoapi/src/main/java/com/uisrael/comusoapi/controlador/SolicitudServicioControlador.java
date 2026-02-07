@@ -19,7 +19,7 @@ import com.uisrael.comusoapi.service.IClienteServicio;
 @RequestMapping("/solicitud") 
 public class SolicitudServicioControlador {
 
-    // 2. DECLARACIÓN DE SERVICIOS: Esto soluciona el error "cannot be resolved"
+   
     @Autowired
     private ISolicitudServicioServicio servicioProcesador; 
 
@@ -38,28 +38,27 @@ public class SolicitudServicioControlador {
 
     @PostMapping("/finalizar")
     public String guardarAgendamiento(
-        @RequestParam("idequipo") int idequipo,
-        @RequestParam("fechacita") String fechaCita,
-        @RequestParam("horacita") String horaCita,
-        @RequestParam("modalidadatencion") String modalidad,
-        @RequestParam(value="descripcion", required=false) String descripcion,
-        @RequestParam(value="direccionservicio", required=false) String direccion,
-        Model model) {
+    	    @RequestParam("idequipo") int idequipo,
+    	    @RequestParam("fechacita") String fechaCita,
+    	    @RequestParam("horacita") String horaCita,
+    	    @RequestParam("modalidadatencion") String modalidad,
+    	    @RequestParam(value="descripcion", required=false) String descripcion,
+    	    @RequestParam(value="direccionservicio", required=false) String direccion,
+    	    Model model) {
 
-        String ticket = servicioProcesador.agendar(idequipo, fechaCita, horaCita, modalidad);
+    	    // AÑADIMOS 'direccion' y 'descripcion' a la llamada del servicio
+    	    String ticket = servicioProcesador.agendar(idequipo, fechaCita, horaCita, modalidad, direccion, descripcion);
 
-        EquipoResponseDTO equipo = servicioEquipo.buscarEquipoPorId(idequipo);
-        ClienteResponseDTO cliente = servicioCliente.buscarClientePorId(equipo.getIdcliente());
+    	    EquipoResponseDTO equipo = servicioEquipo.buscarEquipoPorId(idequipo);
+    	    ClienteResponseDTO cliente = servicioCliente.buscarClientePorId(equipo.getIdcliente());
 
-        model.addAttribute("ticket", ticket);
-        model.addAttribute("fecha", fechaCita + " " + horaCita);
-        model.addAttribute("nombreCliente", cliente.getNombre());
-        model.addAttribute("tipoEquipo", equipo.getTipo());
-        model.addAttribute("marca", equipo.getMarca());
-        model.addAttribute("estado", "PENDIENTE");
+    	    model.addAttribute("ticket", ticket);
+    	    model.addAttribute("fecha", fechaCita + " " + horaCita);
+    	    model.addAttribute("nombreCliente", cliente.getNombre());
+    	    model.addAttribute("tipoEquipo", equipo.getTipo());
+    	    model.addAttribute("marca", equipo.getMarca());
+    	    model.addAttribute("estado", "PENDIENTE");
 
-        return "Equipo/ticket";
-    }
-
-
+    	    return "Equipo/ticket";
+    	}
 }

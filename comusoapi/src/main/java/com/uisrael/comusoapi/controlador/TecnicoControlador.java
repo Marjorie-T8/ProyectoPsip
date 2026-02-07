@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.uisrael.comusoapi.modelo.dto.request.TecnicoRequestDTO;
 import com.uisrael.comusoapi.service.ITecnicoServicio;
-import com.uisrael.comusoapi.service.ISolicitudServicioServicio; // <--- 1. IMPORTANTE TENER ESTA INTERFAZ
+import com.uisrael.comusoapi.service.ISolicitudServicioServicio; 
 
 @Controller
 @RequestMapping("/tecnico")

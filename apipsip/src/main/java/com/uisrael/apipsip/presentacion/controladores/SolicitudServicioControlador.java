@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.ISolicitudServicioUseCase;
+import com.uisrael.apipsip.dominio.entidades.SolicitudServicio;
 import com.uisrael.apipsip.presentacion.mapeadores.ISolicitudServicioDtoMapper;
 import com.uisrael.apipsip.presentacion.dto.request.SolicitudServicioRequestDTO;
 import com.uisrael.apipsip.presentacion.dto.response.SolicitudServicioResponseDTO;
@@ -28,7 +29,22 @@ public class SolicitudServicioControlador {
 
     @PostMapping
     public SolicitudServicioResponseDTO crear(@Valid @RequestBody SolicitudServicioRequestDTO request) {
-        return mapper.toResponseDto(useCase.crear(mapper.toDomain(request)));
+        try {
+            SolicitudServicio domain = mapper.toDomain(request);
+            SolicitudServicio creado = useCase.crear(domain);
+            SolicitudServicioResponseDTO response = mapper.toResponseDto(creado);
+            
+            // Log temporal para ver qué pasa
+            System.out.println("Solicitud creada con ID: " + response.getIdsolicitud());
+            System.out.println("Ticket: " + response.getCodigoticket());
+            
+            return response;
+        } catch (Exception e) {
+            System.err.println("Error al crear solicitud:");
+            System.err.println("Mensaje: " + e.getMessage());
+            e.printStackTrace();
+            throw e;  // o retorna ResponseEntity con error
+        }
     }
 
     @GetMapping("/{id}")
