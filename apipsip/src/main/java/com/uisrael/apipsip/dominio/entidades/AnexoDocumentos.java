@@ -7,8 +7,8 @@ public class AnexoDocumentos implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idAnexo;
-	private final int idOrden;
+	private final int idanexo;
+	private final int idorden;
 	private final String nombreOriginal;
 	private final String nombreGuardado;
 	private final String tipoMime;
@@ -17,8 +17,8 @@ public class AnexoDocumentos implements Serializable {
 	
 	public AnexoDocumentos(int idAnexo, int idOrden, String nombreOriginal, String nombreGuardado, 
 			String tipoMime, LocalDateTime fechaSubida, boolean estado) {
-		this.idAnexo = idAnexo;
-		this.idOrden = idOrden;
+		this.idanexo = idAnexo;
+		this.idorden = idOrden;
 		this.nombreOriginal = nombreOriginal;
 		this.nombreGuardado = nombreGuardado;
 		this.tipoMime = tipoMime;
@@ -27,11 +27,11 @@ public class AnexoDocumentos implements Serializable {
 	}
 	
 	public int getIdAnexo() {
-		return idAnexo;
+		return idanexo;
 	}
 	
 	public int getIdOrden() {
-		return idOrden;
+		return idorden;
 	}
 	
 	public String getNombreOriginal() {

@@ -7,8 +7,8 @@ public class MensajeCliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idMensaje;
-	private final int idOrden;
+	private final int idmensaje;
+	private final int idorden;
 	private final String tipoMensaje;
 	private final String medio;
 	private final String destinatario;
@@ -18,8 +18,8 @@ public class MensajeCliente implements Serializable {
 	
 	public MensajeCliente(int idMensaje, int idOrden, String tipoMensaje, String medio, String destinatario, 
 			String contenido, LocalDateTime fechaEnvio, String estadoEnvio) {
-		this.idMensaje = idMensaje;
-		this.idOrden = idOrden;
+		this.idmensaje = idMensaje;
+		this.idorden = idOrden;
 		this.tipoMensaje = tipoMensaje;
 		this.medio = medio;
 		this.destinatario = destinatario;
@@ -29,11 +29,11 @@ public class MensajeCliente implements Serializable {
 	}
 	
 	public int getIdMensaje() {
-		return idMensaje;
+		return idmensaje;
 	}
 	
 	public int getIdOrden() {
-		return idOrden;
+		return idorden;
 	}
 	
 	public String getTipoMensaje() {

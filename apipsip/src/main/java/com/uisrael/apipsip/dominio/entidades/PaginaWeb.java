@@ -7,8 +7,8 @@ public class PaginaWeb implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idAcceso;
-	private final int idOrden;
+	private final int idacceso;
+	private final int idorden;
 	private final int ipCliente;
 	private final String userAgent;
 	private final LocalDateTime fechaAcceso;
@@ -16,8 +16,8 @@ public class PaginaWeb implements Serializable {
 	
 	public PaginaWeb(int idAcceso, int idOrden, int ipCliente, String userAgent, 
 			LocalDateTime fechaAcceso, String tipoAcceso) {
-		this.idAcceso = idAcceso;
-		this.idOrden = idOrden;
+		this.idacceso = idAcceso;
+		this.idorden = idOrden;
 		this.ipCliente = ipCliente;
 		this.userAgent = userAgent;
 		this.fechaAcceso = fechaAcceso;
@@ -25,11 +25,11 @@ public class PaginaWeb implements Serializable {
 	}
 	
 	public int getIdAcceso() {
-		return idAcceso;
+		return idacceso;
 	}
 	
 	public int getIdOrden() {
-		return idOrden;
+		return idorden;
 	}
 	
 	public int getIpCliente() {
