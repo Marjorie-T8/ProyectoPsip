@@ -7,15 +7,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "paginaweb")
-public class PaginaWebJpa implements Serializable {
+@Table(name = "mensajeciente")
+public class MensajeClienteJpa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idacceso")
-    private int idAcceso;
+    @Column(name = "idmensaje")
+    private int idMensaje;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", insertable = false, updatable = false)
@@ -24,15 +24,18 @@ public class PaginaWebJpa implements Serializable {
     @Column(name = "idorden")
     private int idOrden;
 
-    @Column(name = "ipcliente")
-    private int ipCliente;
+    @Column(name = "tipomensaje")
+    private String tipoMensaje;
 
-    @Column(name = "useragent")
-    private String userAgent;
+    private String medio;
 
-    @Column(name = "fechaacceso")
-    private LocalDateTime fechaAcceso;
+    private String destinatario;
 
-    @Column(name = "tipoacceso")
-    private String tipoAcceso;
+    private String contenido;
+
+    @Column(name = "fechaenvio")
+    private LocalDateTime fechaEnvio;
+
+    @Column(name = "estadoenvio")
+    private String estadoEnvio;
 }
