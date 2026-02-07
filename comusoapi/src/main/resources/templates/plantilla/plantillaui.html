@@ -1,110 +1,113 @@
-<<!DOCTYPE html>
-<html dir="ltr" lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PROYECTO PISIP</title>
-    
+    <title>PROYECTO PISIP - Simulación de Roles</title>
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}" />
-    
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/extra-libs/multicheck/multicheck.css}" />
-    <link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css}" rel="stylesheet" />
     <link th:href="@{/dist/css/style.min.css}" rel="stylesheet" />
+    <style>
+        .role-switcher { display: flex; align-items: center; gap: 10px; margin-left: auto; padding-right: 20px; }
+        .btn-role { padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; text-decoration: none !important; transition: 0.3s; border: 1px solid transparent; }
+        .active-role { border: 2px solid white !important; box-shadow: 0 0 10px rgba(255,255,255,0.5); scale: 1.05; }
+        .sidebar-nav ul .sidebar-item .sidebar-link { display: flex; align-items: center; }
+    </style>
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" 
-         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-    <a class="navbar-brand" th:href="@{/gestion-sistema}">
-        <b class="logo-icon ps-2">
-            <i class="mdi mdi-laptop-mac text-white" style="font-size: 24px;"></i>
-        </b>
-        <span class="logo-text ms-2">
-            <span style="font-weight: bold; font-size: 18px; color: #fff; letter-spacing: 1px;">PROYECTO PISIP</span>
-        </span>
-    </a>
-</div>
-                </nav>
+                    <a class="navbar-brand" th:href="@{/(rol=${rol})}">
+                        <b class="logo-icon ps-2"><i class="mdi mdi-laptop-mac text-white"></i></b>
+                        <span class="logo-text ms-2">PROYECTO PISIP</span>
+                    </a>
+                </div>
+
+                <div class="role-switcher">
+                    <span class="text-white-50 small me-2 d-none d-md-block">SIMULAR:</span>
+                    <a th:href="@{/(rol='ADMIN')}" class="btn-role btn-primary text-white" th:classappend="${rol == 'ADMIN' ? 'active-role' : ''}">
+                        <i class="mdi mdi-shield-account"></i> ADMIN
+                    </a>
+                    <a th:href="@{/(rol='TECNICO')}" class="btn-role btn-success text-white" th:classappend="${rol == 'TECNICO' ? 'active-role' : ''}">
+                        <i class="mdi mdi-wrench"></i> TÉCNICO
+                    </a>
+                    <a th:href="@{/(rol='CLIENTE')}" class="btn-role btn-secondary text-white" th:classappend="${rol == 'CLIENTE' or rol == null ? 'active-role' : ''}">
+                        <i class="mdi mdi-account"></i> CLIENTE
+                    </a>
+                </div>
+            </nav>
         </header>
 
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
-				    <ul id="sidebarnav" class="pt-4">
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/cliente/listar}">
-				                <i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Listar Cliente</span>
-				            </a>
-				        </li>
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/cliente/nuevo}">
-				                <i class="mdi mdi-account-plus"></i><span class="hide-menu">Nuevo Cliente</span>
-				            </a>
-				        </li>
-				        
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/orden/listar}">
-				                <i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Listar Orden</span>
-				            </a>
-				        </li>
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/orden/nueva}">
-				                <i class="mdi mdi-border-inside"></i><span class="hide-menu">Orden Nueva</span>
-				            </a>
-				        </li>
-				    </ul>
-				</nav>
+                    <ul id="sidebarnav" class="pt-4">
+                        
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" th:href="@{/(rol=${rol})}">
+                                <i class="mdi mdi-home"></i><span>Inicio</span>
+                            </a>
+                        </li>
+
+                        <div th:if="${rol == 'ADMIN'}">
+                            <hr style="border-color: rgba(255,255,255,0.1);">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link btn-primary text-white mb-1" th:href="@{/cliente/listar(rol=${rol})}">
+                                    <i class="mdi mdi-account-multiple"></i><span>Listar Clientes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/tecnico/crear(rol=${rol})}">
+                                    <i class="mdi mdi-account-plus"></i><span>Crear Técnico</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/servicio/crear(rol=${rol})}">
+                                    <i class="mdi mdi-playlist-plus"></i><span>Crear Servicio</span>
+                                </a>
+                            </li>
+                        </div>
+
+                        <div th:if="${rol == 'ADMIN' or rol == 'TECNICO'}">
+                            <hr style="border-color: rgba(255,255,255,0.1);">
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/orden/listar(rol=${rol})}">
+                                    <i class="mdi mdi-format-list-bulleted"></i><span>Listar Órdenes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" th:href="@{/orden/ver(rol=${rol})}">
+                                    <i class="mdi mdi-eye"></i><span>Ver Órdenes</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link btn-info text-white mt-2" th:href="@{/reportes(rol=${rol})}">
+                                    <i class="mdi mdi-chart-bar"></i><span>Reportes</span>
+                                </a>
+                            </li>
+                        </div>
+
+                    </ul>
+                </nav>
             </div>
         </aside>
 
-         <div class="page-wrapper">
-				    <div class="container-fluid pt-2">
-				        
-				        <div class="row mb-2" th:if="${nombreCliente != null or nombrePagina != null}">
-				            <div class="col-12">
-				                <h4 class="page-title">
-				                    <span th:text="${nombrePagina ?: 'Gestión'}"></span> 
-				                    <span th:if="${nombreCliente}" th:text="' - ' + ${nombreCliente}" class="text-primary"></span>
-				                </h4>
-				            </div>
-				        </div>
-				
-				        <div layout:fragment="contenidopaginas"></div>
-				    </div>
-				
-				
-				</div>
+        <div class="page-wrapper">
+            <div class="container-fluid pt-2">
+                <div class="alert alert-light border shadow-sm py-1 mb-2 d-flex justify-content-between align-items-center">
+                    <span class="text-muted small">Vista actual: <strong th:text="${rol ?: 'CLIENTE'}"></strong></span>
+                    <span class="badge bg-dark" th:text="${#calendars.format(#calendars.createNow(), 'dd/MMM/yyyy')}"></span>
+                </div>
+                
+                <div layout:fragment="contenidopaginas"></div>
+            </div>
+        </div>
     </div>
 
     <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
     <script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
-    <script th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
-    <script th:src="@{/dist/js/waves.js}"></script>
-    <script th:src="@{/dist/js/sidebarmenu.js}"></script>
     <script th:src="@{/dist/js/custom.min.js}"></script>
-    <script th:src="@{/assets/extra-libs/DataTables/datatables.min.js}"></script>
-    
-    <script>
-      $(document).ready(function() {
-          if ($("#zero_config").length) {
-              $("#zero_config").DataTable();
-          }
-      });
-    </script>
 </body>
 </html>

@@ -12,5 +12,6 @@ import com.uisrael.apipsip.presentacion.dto.response.EquipoResponseDTO;
 public interface IEquipoDtoMapper {
 	
     Equipo toDomain(EquipoRequestDTO dto);
+   
     EquipoResponseDTO toResponseDto(Equipo equipo);
 }

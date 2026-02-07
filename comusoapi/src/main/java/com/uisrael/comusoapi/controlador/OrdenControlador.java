@@ -49,27 +49,23 @@ public class OrdenControlador {
     public String mostrarFormularioNueva(@RequestParam(name = "idCliente", required = false) Integer idCliente, Model model) {
         OrdenTrabajoRequestDTO ordenDTO = new OrdenTrabajoRequestDTO();
         
-      
         if (idCliente != null && idCliente > 0) {
-            ordenDTO.setIdCliente(idCliente);
+            ordenDTO.setIdcliente(idCliente);
             ordenDTO.setEstado("PENDIENTE"); 
-            ordenDTO.setFechaSolicitud(LocalDate.now()); 
+            ordenDTO.setFechacreacion(LocalDate.now()); 
             
-          
             model.addAttribute("listaequipos", servicioEquipo.listarEquiposPorCliente(idCliente));
         }
 
         model.addAttribute("ordenDTO", ordenDTO);
         model.addAttribute("idClienteSeleccionado", idCliente);
         
-      
         model.addAttribute("listaclientes", servicioCliente.listarCliente());
         model.addAttribute("listatecnicos", servicioTecnico.listarTecnico());
         model.addAttribute("listaservicios", servicioTipo.listarTipoServicio());
 
         return "orden/nuevaorden";
     }
-
     @PostMapping("/guardar")
     public String guardarOrden(@ModelAttribute("ordenDTO") OrdenTrabajoRequestDTO ordenDTO, RedirectAttributes flash) {
         try {
@@ -109,6 +105,19 @@ public class OrdenControlador {
         model.addAttribute("orden", ordenEncontrada); 
         
         return "orden/verorden";
+    }
+    @GetMapping("/consultar")
+    public String consultarToken(@RequestParam String token, @RequestParam(required = false) String rol, Model model) {
+        model.addAttribute("rol", rol);
+        OrdenTrabajoResponseDTO orden = servicioOrden.buscarPorToken(token);
+        
+        if (orden == null) {
+            model.addAttribute("error", "No se encontró ninguna orden con el código ingresado.");
+            return "solicitud/revisartoken"; // Regresa a la misma página con el error
+        }
+        
+        model.addAttribute("orden", orden);
+        return "orden/verorden"; // Si lo encuentra, lo manda directo al detalle
     }
 }
    

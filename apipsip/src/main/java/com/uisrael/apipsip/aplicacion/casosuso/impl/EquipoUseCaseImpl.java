@@ -18,7 +18,6 @@ public class EquipoUseCaseImpl implements IEquipoUseCase {
     public Equipo crear(Equipo equipo) {
         return repositorio.guardar(equipo);
     }
-
     @Override
     public Equipo obtenerPorId(int id) {
         return repositorio.buscarPorId(id)

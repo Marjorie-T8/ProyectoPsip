@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.uisrael.comusoapi.modelo.dto.request.EquipoRequestDTO;
 import com.uisrael.comusoapi.modelo.dto.response.ClienteResponseDTO;
@@ -40,36 +40,32 @@ public class EquipoControlador {
         return "equipo/listarequipos"; 
     }
 
-    @GetMapping("/nuevo")
-    public String nuevoEquipo(@RequestParam(name = "idCliente") int idCliente, Model model) {
-        EquipoRequestDTO equipoDTO = new EquipoRequestDTO();
-        equipoDTO.setIdCliente(idCliente); 
-        
-        model.addAttribute("idCliente", idCliente);
-        model.addAttribute("equipoDTO", equipoDTO);
-        return "equipo/nuevoequipo"; 
+    @GetMapping("/nuevo/{idCliente}")
+    public String formularioEquipo(@PathVariable int idCliente, Model model) {
+        EquipoRequestDTO dto = new EquipoRequestDTO();
+        dto.setIdcliente(idCliente);
+        model.addAttribute("equipoDTO", dto);
+        return "equipo/nuevoequipo";
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute("equipoDTO") EquipoRequestDTO equipoDTO) {
-      
-        servicioEquipo.crearEquipo(equipoDTO);
-        return "redirect:/equipo/listarPorCliente/" + equipoDTO.getIdCliente();
-    }
-
-    @GetMapping("/editar/{id}")
-    public String editar(@PathVariable int id, Model model) {
-        EquipoResponseDTO equipo = servicioEquipo.buscarEquipoPorId(id);
-         model.addAttribute("equipoDTO", equipo); 
-        model.addAttribute("idCliente", equipo.getIdCliente());
+    public String guardarEquipo(@ModelAttribute EquipoRequestDTO dto) {
+        EquipoResponseDTO equipoCreado = servicioEquipo.crearEquipo(dto);
         
-        return "equipo/nuevoequipo"; 
+        // Aquí NO hay lógica: solo usamos lo que devuelve el servicio
+        return "redirect:/solicitud/agendar?idEquipo=" + equipoCreado.getIdequipo();
     }
 
+
+    @GetMapping("/imprimir/{id}")
+    public String imprimir(@PathVariable int id, Model model) {
+       
+        model.addAttribute("equipo", servicioEquipo.buscarEquipoPorId(id));
+        return "equipo/ticket"; 
+    }
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable int id) {
-        int idClie = servicioEquipo.buscarEquipoPorId(id).getIdCliente();
-        
+        int idClie = servicioEquipo.buscarEquipoPorId(id).getIdcliente();        
          servicioEquipo.eliminarEquipo(id);
         return "redirect:/equipo/listarPorCliente/" + idClie;
     }

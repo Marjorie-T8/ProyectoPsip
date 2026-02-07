@@ -1,17 +1,16 @@
 package com.uisrael.comusoapi.modelo.dto.response;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 @Data
 public class EquipoResponseDTO {
 
-    private int idEquipo;
+    private int idequipo; 
     @JsonProperty("idcliente")
-    private int idCliente;  
+    private int idcliente; 
+    private String tipo;
     private String marca;
     private String modelo;
     @JsonProperty("numserie")
-    private String numSerie;
-    private String descripcion;
+    private String numserie;    
+    private String estadoequipo; 
 }

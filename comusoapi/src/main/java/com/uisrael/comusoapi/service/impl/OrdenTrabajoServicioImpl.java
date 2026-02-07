@@ -11,11 +11,11 @@ import com.uisrael.comusoapi.modelo.dto.response.OrdenTrabajoResponseDTO;
 import com.uisrael.comusoapi.service.IOrdenTrabajoServicio;
 
 @Service
-public class OrdenTrabajoServiceImpl implements IOrdenTrabajoServicio {
+public class OrdenTrabajoServicioImpl implements IOrdenTrabajoServicio {
 
     private final WebClient webClient;
 
-    public OrdenTrabajoServiceImpl(WebClient webClient) {
+    public OrdenTrabajoServicioImpl(WebClient webClient) {
         this.webClient = webClient;
     }
 
@@ -31,15 +31,10 @@ public class OrdenTrabajoServiceImpl implements IOrdenTrabajoServicio {
 
     @Override
     public void crearOrdenTrabajo(OrdenTrabajoRequestDTO dto) {
-        dto.setFechaSolicitud(LocalDate.now());
+   
+        dto.setFechacreacion(LocalDate.now()); 
         dto.setEstado("PENDIENTE");
-        
-        webClient.post()
-                .uri("/ordentrabajo") 
-                .bodyValue(dto)
-                .retrieve()
-                .toBodilessEntity()
-                .block();
+    
     }
 
     @Override
@@ -65,11 +60,18 @@ public class OrdenTrabajoServiceImpl implements IOrdenTrabajoServicio {
     @Override
     public OrdenTrabajoResponseDTO buscarOrdenTrabajoPorId(int id) {
         return webClient.get()
-                .uri("/ordentrabajo/{id}", id) // Llama al código de atrás (8080)
+                .uri("/ordentrabajo/{id}", id)
                 .retrieve()
                 .bodyToMono(OrdenTrabajoResponseDTO.class)
                 .block();
     }
-
+    @Override
+  
+    public OrdenTrabajoResponseDTO buscarPorCodigoTicket(String codigo) {
+        return listarOrdenesTrabajo().stream()
+                .filter(o -> o.getCodigoticket().equals(codigo))
+                .findFirst()
+                .orElse(null);
+    }
    
 }

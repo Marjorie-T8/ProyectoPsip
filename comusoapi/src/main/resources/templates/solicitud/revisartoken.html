@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
+
+<body>
+    <div layout:fragment="contenidopaginas">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title"><i class="mdi mdi-magnify text-primary"></i> Seguimiento de Orden de Servicio</h4>
+                            <p class="text-muted">Ingrese el token o código de su orden para conocer el estado actual de su reparación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <div class="card border-top border-primary shadow">
+                        <div class="card-body">
+                            <form th:action="@{/solicitud/consultar(rol=${rol})}" method="get">
+                                <div class="form-group mb-3">
+                                    <label class="font-weight-bold">Código / Token de Seguimiento</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary text-white" id="basic-addon1">
+                                                <i class="mdi mdi-ticket"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" name="token" class="form-control form-control-lg" 
+                                               placeholder="Ej: OT-2026-XXXX" required>
+                                    </div>
+                                    <small class="form-text text-muted">Este código se encuentra en su comprobante impreso.</small>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block shadow-sm">
+                                        <i class="mdi mdi-search-web"></i> Consultar Estado
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a th:href="@{/(rol=${rol})}" class="btn btn-outline-secondary btn-sm">
+                            <i class="mdi mdi-arrow-left"></i> Regresar al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4" th:if="${error != null}">
+                <div class="col-md-6">
+                    <div class="alert alert-danger shadow-sm border-0 animate__animated animate__shakeX">
+                        <div class="d-flex align-items-center">
+                            <i class="mdi mdi-alert-circle mdi-24px me-2"></i>
+                            <div>
+                                <strong>¡Atención!</strong> <span th:text="${error}">El token ingresado no es válido.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

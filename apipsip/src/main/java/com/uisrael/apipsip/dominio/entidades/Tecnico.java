@@ -5,37 +5,34 @@ import java.io.Serializable;
 public class Tecnico implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private final int idTecnico;
+	private final int idtecnico;
 	private final String nombre;
 	private final String email;
 	private final String telefono;
 	private final boolean activo;
-
-	public Tecnico(int idTecnico, String nombre, String email, String telefono, boolean activo) {
-		this.idTecnico = idTecnico;
+	public Tecnico(int idtecnico, String nombre, String email, String telefono, boolean activo) {
+		super();
+		this.idtecnico = idtecnico;
 		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
 		this.activo = activo;
 	}
-	
-	public int getIdTecnico() {
-		return idTecnico;
+	public int getIdtecnico() {
+		return idtecnico;
 	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public String getTelefono() {
 		return telefono;
 	}
-
 	public boolean isActivo() {
 		return activo;
 	}
+
+	
 }

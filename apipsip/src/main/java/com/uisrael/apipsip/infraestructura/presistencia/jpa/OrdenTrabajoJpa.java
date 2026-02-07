@@ -6,62 +6,62 @@ import java.time.LocalTime;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
-@Entity
-@Table(name = "ordentrabajo")
-public class OrdenTrabajoJpa implements Serializable {
+    @Data
+    @Entity
+    @Table(name = "ordentrabajo")
+    public class OrdenTrabajoJpa implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idorden")
-    private int idOrden;
+        private static final long serialVersionUID = 1L;
 
-    private String codigo;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "idorden")
+        private int idorden;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idcliente", insertable = false, updatable = false)
-    private ClienteJpa cliente;
+        @Column(name = "codigo", unique = true, nullable = false)
+        private String codigo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idtecnico", insertable = false, updatable = false)
-    private TecnicoJpa tecnico;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "idsolicitud", nullable = false)
+        private SolicitudServicioJpa solicitud;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idtipo", insertable = false, updatable = false)
-    private TipoServicioJpa tipoServicio;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "idcliente", nullable = false)
+        private ClienteJpa cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idequipo", insertable = false, updatable = false)
-    private EquipoJpa equipo;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "idtecnico")
+        private TecnicoJpa tecnico;
 
-    @Column(name = "idcliente")
-    private int idCliente;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "idtipo")
+        private TipoServicioJpa tipoServicio;
 
-    @Column(name = "idtecnico")
-    private int idTecnico;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "idequipo", nullable = false)
+        private EquipoJpa equipo;
 
-    @Column(name = "idtipo")
-    private int idTipoServicio;
+        @Column(name = "fechacreacion")
+        private LocalDate fechacreacion; 
 
-    @Column(name = "idequipo")
-    private int idEquipo;
+        @Column(name = "fechasolicitud")
+        private LocalDate fechasolicitud; 
 
-    @Column(name = "fechasolicitud") 
-    private LocalDate fechaSolicitud;
+        @Column(name = "fechacita")
+        private LocalDate fechacita;
 
-    @Column(name = "fechaagendada") 
-    private LocalDate fechaCita;
+        @Column(name = "horacita")
+        private LocalTime horacita;
 
-    @Column(name = "horaagendada")  
-    private LocalTime horaCita;
+        @Column(name = "estado")
+        private String estado;
 
-    private String estado;
+        @Column(name = "numseriereal")
+        private String numseriereal;
 
-    @Column(name = "descripciontrabajo") 
-    private String descripcionTrabajo;
+        @Column(name = "descripciontrabajo", columnDefinition = "TEXT")
+        private String descripciontrabajo;
 
-    private String observaciones;
+        @Column(name = "observaciones", columnDefinition = "TEXT")
+        private String observaciones;
 }
-	
