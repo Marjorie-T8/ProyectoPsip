@@ -3,69 +3,40 @@ package com.uisrael.apipsip.presentacion.dto.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EquipoResponseDTO {
-	
-	private  int idEquipo;
+	@JsonProperty("idequipo")
+	private int idequipo;
 	@JsonProperty("idcliente")
-	  private int idCliente; 
-	
+	private  int idcliente;
+	private String tipo;
 	private  String marca;
-	
+
 	private  String modelo;
-	@JsonProperty("numserie")
-	private  String numSerie;
-	
-	private String descripcion;
-
-	public int getIdEquipo() {
-		return idEquipo;
+	private String numserie;
+	private String estadoequipo;
+	public int getIdequipo() {
+		return idequipo;
 	}
-
-	public void setIdEquipo(int idEquipo) {
-		this.idEquipo = idEquipo;
+	public int getIdcliente() {
+		return idcliente;
 	}
-
-	public int getIdCliente() {
-		return idCliente;
+	public String getTipo() {
+		return tipo;
 	}
-
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
-
 	public String getMarca() {
 		return marca;
 	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
 	public String getModelo() {
 		return modelo;
 	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
+	public String getNumserie() {
+		return numserie;
+	}
+	public String getEstadoequipo() {
+		return estadoequipo;
 	}
 
-	public String getNumSerie() {
-		return numSerie;
-	}
-
-	public void setNumSerie(String numSerie) {
-		this.numSerie = numSerie;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-	
-
-	
 }
+	
+
+	
+

@@ -2,37 +2,33 @@ package com.uisrael.apipsip.presentacion.dto.response;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-
-
 public class OrdenTrabajoResponseDTO {
-	private int idOrden;
+
+	private int idorden;
     private String codigo;
+    private int idsolicitud; 
 
-    private int idCliente;
-    private String nombreCliente;   
-    
-    private int idTecnico;
-    private String nombreTecnico;   
-
-    private int idTipoServicio;
-    private String nombreTipoServicio; 
-
-    private int idEquipo;
-    private String nombreEquipo;   
-
-    private LocalDate fechaSolicitud;
-    private LocalDate fechaCita;
+    private LocalDate fechacreacion; 
+    private LocalDate fechaCita;     
     private LocalTime horaCita;
     
-    private String estado;
+    
+    private String estado; 
+    
+    private int idcliente;
+    private int idtecnico;
+    private int idequipo;
+    private int idtiposervicio;
+
+
+    private String numseriereal; 
     private String descripcionTrabajo;
     private String observaciones;
-	public int getIdOrden() {
-		return idOrden;
+	public int getIdorden() {
+		return idorden;
 	}
-	public void setIdOrden(int idOrden) {
-		this.idOrden = idOrden;
+	public void setIdorden(int idorden) {
+		this.idorden = idorden;
 	}
 	public String getCodigo() {
 		return codigo;
@@ -40,59 +36,17 @@ public class OrdenTrabajoResponseDTO {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdsolicitud() {
+		return idsolicitud;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setIdsolicitud(int idsolicitud) {
+		this.idsolicitud = idsolicitud;
 	}
-	public String getNombreCliente() {
-		return nombreCliente;
+	public LocalDate getFechacreacion() {
+		return fechacreacion;
 	}
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
-	}
-	public int getIdTecnico() {
-		return idTecnico;
-	}
-	public void setIdTecnico(int idTecnico) {
-		this.idTecnico = idTecnico;
-	}
-	public String getNombreTecnico() {
-		return nombreTecnico;
-	}
-	public void setNombreTecnico(String nombreTecnico) {
-		this.nombreTecnico = nombreTecnico;
-	}
-	public int getIdTipoServicio() {
-		return idTipoServicio;
-	}
-	public void setIdTipoServicio(int idTipoServicio) {
-		this.idTipoServicio = idTipoServicio;
-	}
-	public String getNombreTipoServicio() {
-		return nombreTipoServicio;
-	}
-	public void setNombreTipoServicio(String nombreTipoServicio) {
-		this.nombreTipoServicio = nombreTipoServicio;
-	}
-	public int getIdEquipo() {
-		return idEquipo;
-	}
-	public void setIdEquipo(int idEquipo) {
-		this.idEquipo = idEquipo;
-	}
-	public String getNombreEquipo() {
-		return nombreEquipo;
-	}
-	public void setNombreEquipo(String nombreEquipo) {
-		this.nombreEquipo = nombreEquipo;
-	}
-	public LocalDate getFechaSolicitud() {
-		return fechaSolicitud;
-	}
-	public void setFechaSolicitud(LocalDate fechaSolicitud) {
-		this.fechaSolicitud = fechaSolicitud;
+	public void setFechacreacion(LocalDate fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 	public LocalDate getFechaCita() {
 		return fechaCita;
@@ -112,6 +66,36 @@ public class OrdenTrabajoResponseDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public int getIdcliente() {
+		return idcliente;
+	}
+	public void setIdcliente(int idcliente) {
+		this.idcliente = idcliente;
+	}
+	public int getIdtecnico() {
+		return idtecnico;
+	}
+	public void setIdtecnico(int idtecnico) {
+		this.idtecnico = idtecnico;
+	}
+	public int getIdequipo() {
+		return idequipo;
+	}
+	public void setIdequipo(int idequipo) {
+		this.idequipo = idequipo;
+	}
+	public int getIdtiposervicio() {
+		return idtiposervicio;
+	}
+	public void setIdtiposervicio(int idtiposervicio) {
+		this.idtiposervicio = idtiposervicio;
+	}
+	public String getNumseriereal() {
+		return numseriereal;
+	}
+	public void setNumseriereal(String numseriereal) {
+		this.numseriereal = numseriereal;
+	}
 	public String getDescripcionTrabajo() {
 		return descripcionTrabajo;
 	}
@@ -124,7 +108,6 @@ public class OrdenTrabajoResponseDTO {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-    
 	
     
 }

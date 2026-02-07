@@ -13,14 +13,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
-
-
 public class ClienteJpa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name = "idcliente") 
-    private int idCliente;
+    private int idcliente;
 
     @Column(length = 80, nullable = false)
     private String nombre;

@@ -49,27 +49,23 @@ public class OrdenControlador {
     public String mostrarFormularioNueva(@RequestParam(name = "idCliente", required = false) Integer idCliente, Model model) {
         OrdenTrabajoRequestDTO ordenDTO = new OrdenTrabajoRequestDTO();
         
-      
         if (idCliente != null && idCliente > 0) {
-            ordenDTO.setIdCliente(idCliente);
+            ordenDTO.setIdcliente(idCliente);
             ordenDTO.setEstado("PENDIENTE"); 
-            ordenDTO.setFechaSolicitud(LocalDate.now()); 
+            ordenDTO.setFechacreacion(LocalDate.now()); 
             
-          
             model.addAttribute("listaequipos", servicioEquipo.listarEquiposPorCliente(idCliente));
         }
 
         model.addAttribute("ordenDTO", ordenDTO);
         model.addAttribute("idClienteSeleccionado", idCliente);
         
-      
         model.addAttribute("listaclientes", servicioCliente.listarCliente());
         model.addAttribute("listatecnicos", servicioTecnico.listarTecnico());
         model.addAttribute("listaservicios", servicioTipo.listarTipoServicio());
 
         return "orden/nuevaorden";
     }
-
     @PostMapping("/guardar")
     public String guardarOrden(@ModelAttribute("ordenDTO") OrdenTrabajoRequestDTO ordenDTO, RedirectAttributes flash) {
         try {

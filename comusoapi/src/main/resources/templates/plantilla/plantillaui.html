@@ -1,15 +1,14 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PROYECTO PISIP</title>
     
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}" />
-    
     <link rel="stylesheet" type="text/css" th:href="@{/assets/extra-libs/multicheck/multicheck.css}" />
     <link th:href="@{/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css}" rel="stylesheet" />
     <link th:href="@{/dist/css/style.min.css}" rel="stylesheet" />
@@ -29,71 +28,77 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-    <a class="navbar-brand" th:href="@{/gestion-sistema}">
-        <b class="logo-icon ps-2">
-            <i class="mdi mdi-laptop-mac text-white" style="font-size: 24px;"></i>
-        </b>
-        <span class="logo-text ms-2">
-            <span style="font-weight: bold; font-size: 18px; color: #fff; letter-spacing: 1px;">PROYECTO PISIP</span>
-        </span>
-    </a>
-</div>
-                </nav>
+                    <a class="navbar-brand" th:href="@{/}">
+                        <b class="logo-icon ps-2">
+                            <i class="mdi mdi-laptop-mac text-white" style="font-size: 24px;"></i>
+                        </b>
+                        <span class="logo-text ms-2">
+                            <span style="font-weight: bold; font-size: 18px; color: #fff; letter-spacing: 1px;">PROYECTO PISIP</span>
+                        </span>
+                    </a>
+                </div>
+            </nav>
         </header>
 
         <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
-				    <ul id="sidebarnav" class="pt-4">
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/cliente/listar}">
-				                <i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Listar Cliente</span>
-				            </a>
-				        </li>
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/cliente/nuevo}">
-				                <i class="mdi mdi-account-plus"></i><span class="hide-menu">Nuevo Cliente</span>
-				            </a>
-				        </li>
-				        
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/orden/listar}">
-				                <i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Listar Orden</span>
-				            </a>
-				        </li>
-				        <li class="sidebar-item">
-				            <a class="sidebar-link waves-effect waves-dark" th:href="@{/orden/nueva}">
-				                <i class="mdi mdi-border-inside"></i><span class="hide-menu">Orden Nueva</span>
-				            </a>
-				        </li>
-				    </ul>
-				</nav>
+                    <ul id="sidebarnav" class="pt-4">
+                        
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" th:href="@{/}">
+                                <i class="mdi mdi-home"></i><span class="hide-menu">Inicio</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" sec:authorize="hasRole('ADMIN')">
+                            <a class="sidebar-link waves-effect waves-dark btn-primary text-white mb-2 shadow-sm" th:href="@{/cliente/listar}">
+                                <i class="mdi mdi-account-group"></i><span class="hide-menu">Gestión Clientes (ADMIN)</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" sec:authorize="hasRole('TECNICO')">
+                            <a class="sidebar-link waves-effect waves-dark btn-success text-white mb-2 shadow-sm" th:href="@{/tecnico/solicitudes}">
+                                <i class="mdi mdi-wrench"></i><span class="hide-menu">Panel Técnico (TICKETS)</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item" sec:authorize="hasAnyRole('ADMIN', 'TECNICO')">
+                            <a class="sidebar-link waves-effect waves-dark btn-info text-white mb-2" th:href="@{/reportes}">
+                                <i class="mdi mdi-chart-bar"></i><span class="hide-menu">Reportes</span>
+                            </a>
+                        </li>
+
+                        <hr style="border-color: rgba(255,255,255,0.1);">
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark" th:href="@{/orden/listar}">
+                                <i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Listar Orden</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </aside>
 
-         <div class="page-wrapper">
-				    <div class="container-fluid pt-2">
-				        
-				        <div class="row mb-2" th:if="${nombreCliente != null or nombrePagina != null}">
-				            <div class="col-12">
-				                <h4 class="page-title">
-				                    <span th:text="${nombrePagina ?: 'Gestión'}"></span> 
-				                    <span th:if="${nombreCliente}" th:text="' - ' + ${nombreCliente}" class="text-primary"></span>
-				                </h4>
-				            </div>
-				        </div>
-				
-				        <div layout:fragment="contenidopaginas"></div>
-				    </div>
-				
-				
-				</div>
+        <div class="page-wrapper">
+            <div class="container-fluid pt-2">
+                <div class="row mb-2" th:if="${nombreCliente != null or nombrePagina != null}">
+                    <div class="col-12">
+                        <h4 class="page-title">
+                            <span th:text="${nombrePagina ?: 'Gestión'}"></span> 
+                            <span th:if="${nombreCliente}" th:text="' - ' + ${nombreCliente}" class="text-primary"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div layout:fragment="contenidopaginas"></div>
+            </div>
+        </div>
     </div>
 
     <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
     <script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
-    <script th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
     <script th:src="@{/dist/js/waves.js}"></script>
     <script th:src="@{/dist/js/sidebarmenu.js}"></script>
     <script th:src="@{/dist/js/custom.min.js}"></script>

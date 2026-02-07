@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/plantilla/plantillaui">
+<head>
+    <title>Inicio - ICPE S.A.S.</title>
+</head>
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-3 fw-bold text-primary">ICPE S.A.S.</h1>
+        <p class="lead mb-5 text-dark">Soluciones Integrales en Soporte Técnico y Mantenimiento</p>
+        
+        <hr class="my-5">
+
+        <h3 class="mb-4">NUESTROS SERVICIOS</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm border-primary">
+                    <div class="card-body">
+                        <i class="ti-desktop fs-1 text-primary mb-3"></i>
+                        <h5 class="card-title">Soporte PC/Laptop</h5>
+                        <p class="card-text text-muted">Mantenimiento preventivo y correctivo de hardware y software.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm border-primary">
+                    <div class="card-body">
+                        <i class="ti-server fs-1 text-primary mb-3"></i>
+                        <h5 class="card-title">Servidores</h5>
+                        <p class="card-text text-muted">Configuración y administración de infraestructura de red.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow-sm border-primary">
+                    <div class="card-body">
+                        <i class="ti-shield fs-1 text-primary mb-3"></i>
+                        <h5 class="card-title">Ciberseguridad</h5>
+                        <p class="card-text text-muted">Protección de datos y eliminación de amenazas informáticas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-5">
+
+        <div class="row justify-content-center gap-3 mt-4">
+            <div class="col-md-4">
+    <a th:href="@{/cliente/nuevo}" class="btn btn-primary">Agendar Cita</a>
+
+</div>
+            <div class="col-md-4">
+                <a th:href="@{/revisar}" class="btn btn-outline-primary btn-lg w-100 py-3 shadow">
+                    <i class="ti-search me-2"></i> REVISAR TICKET
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

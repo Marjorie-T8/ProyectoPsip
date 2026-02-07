@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.uisrael.comusoapi.modelo.dto.request.TecnicoRequestDTO;
+import com.uisrael.comusoapi.modelo.dto.response.SolicitudServicioResponseDTO;
 import com.uisrael.comusoapi.modelo.dto.response.TecnicoResponseDTO;
 import com.uisrael.comusoapi.service.ITecnicoServicio;
 @Service
@@ -41,7 +42,7 @@ public class TecnicoServicioImpl  implements ITecnicoServicio{
     @Override
     public void actualizarTecnico(TecnicoRequestDTO dto) {
         webClient.put()
-                .uri("/tecnico/{id}", dto.getIdTecnico())
+                .uri("/tecnico/{id}", dto.getIdtecnico())
                 .bodyValue(dto)
                 .retrieve()
                 .toBodilessEntity()
@@ -65,4 +66,11 @@ public class TecnicoServicioImpl  implements ITecnicoServicio{
                 .collectList()
                 .block();
     }
+
+
+	@Override
+	public List<SolicitudServicioResponseDTO> listarSolicitudesPendientes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

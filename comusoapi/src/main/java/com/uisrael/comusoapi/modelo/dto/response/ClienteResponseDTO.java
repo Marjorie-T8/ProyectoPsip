@@ -2,7 +2,7 @@ package com.uisrael.comusoapi.modelo.dto.response;
 import lombok.Data;
 @Data
 public class ClienteResponseDTO {
-    private int idCliente;
+    private int idcliente;
 	private String nombre;
 	private String email; 
 	private  String telefono;

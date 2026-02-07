@@ -53,7 +53,7 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	    
 	    ClienteJpa entity = entityMapper.toEntity(cliente);
 	  
-	    entity.setIdCliente(id); 
+	    entity.setIdcliente(id); 
 	    ClienteJpa guardado = jpaRepository.save(entity);
 	    
 	    return entityMapper.toDomain(guardado);

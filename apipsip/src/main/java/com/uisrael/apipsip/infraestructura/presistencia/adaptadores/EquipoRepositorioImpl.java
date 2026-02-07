@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.uisrael.apipsip.dominio.entidades.Equipo;
 import com.uisrael.apipsip.dominio.repositorios.IEquipoRepositorio;
+import com.uisrael.apipsip.infraestructura.presistencia.jpa.ClienteJpa;
 import com.uisrael.apipsip.infraestructura.presistencia.jpa.EquipoJpa;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IEquipoJpaMapper;
 import com.uisrael.apipsip.infraestructura.respositorios.IEquipoJpaRepositorio;
@@ -23,8 +24,16 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
 
     @Override
     public Equipo guardar(Equipo equipo) {
+       
         EquipoJpa entity = entityMapper.toEntity(equipo);
+        if (entity.getCliente() == null) {
+            ClienteJpa clienteJpa = new ClienteJpa();
+            clienteJpa.setIdcliente(equipo.getIdcliente());
+            entity.setCliente(clienteJpa); 
+        }
+
         EquipoJpa guardado = jpaRepository.save(entity);
+
         return entityMapper.toDomain(guardado);
     }
 
@@ -49,9 +58,7 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
 
     @Override
     public List<Equipo> listarPorCliente(int idCliente) {
-       
-        return jpaRepository.findByIdCliente(idCliente) 
-                .stream()
+        return jpaRepository.findByClienteIdcliente(idCliente).stream() 
                 .map(entityMapper::toDomain)
                 .toList();
     }
@@ -59,7 +66,7 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
     public Equipo actualizar(int id, Equipo equipo) {
         EquipoJpa entity = entityMapper.toEntity(equipo);
       
-        entity.setIdEquipo(id); 
+        entity.setIdequipo(id); 
         return entityMapper.toDomain(jpaRepository.save(entity));
     }
     

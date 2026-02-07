@@ -2,7 +2,7 @@ package com.uisrael.apipsip.presentacion.controladores;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;

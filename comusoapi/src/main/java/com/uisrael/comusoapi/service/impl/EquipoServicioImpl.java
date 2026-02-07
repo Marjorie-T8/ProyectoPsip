@@ -26,21 +26,37 @@ public class EquipoServicioImpl implements IEquipoServicio {
     }
 
     @Override
-    public void crearEquipo(EquipoRequestDTO dto) {
+    public EquipoResponseDTO crearEquipo(EquipoRequestDTO dto) {
         try {
-            webClient.post()
+            EquipoResponseDTO respuesta = webClient.post()
                     .uri("/equipo")
                     .bodyValue(dto)
                     .retrieve()
-                    .toBodilessEntity()
+                    .onStatus(status -> status.isError(), response -> {
+                        return response.bodyToMono(String.class)
+                                .map(body -> new RuntimeException("Error en backend: " + response.statusCode() + " - " + body));
+                    })
+                    .bodyToMono(EquipoResponseDTO.class)
                     .block();
-        } catch (org.springframework.web.reactive.function.client.WebClientResponseException e) {
-            
-            System.err.println("DETALLE ERROR EQUIPO: " + e.getResponseBodyAsString());
+            // Log temporal para ver exactamente qué llega
+            System.out.println("Respuesta del backend 8080:");
+            System.out.println(" - Objeto completo: " + respuesta);
+            if (respuesta != null) {
+                System.out.println(" - idequipo recibido: " + respuesta.getIdequipo());
+            } else {
+                System.out.println(" - Respuesta fue NULL");
+            }
+            // Seguridad: si por alguna razón el ID no llegó, lanzamos excepción
+            if (respuesta == null || respuesta.getIdequipo() <= 0) {
+                throw new RuntimeException("El backend no devolvió un ID válido para el equipo");
+            }
+            return respuesta;
+        } catch (Exception e) {
+            System.err.println("Fallo al crear equipo: " + e.getMessage());
+            e.printStackTrace();
             throw e;
         }
     }
-
     @Override
     public EquipoResponseDTO buscarEquipoPorId(int id) {
         return webClient.get()

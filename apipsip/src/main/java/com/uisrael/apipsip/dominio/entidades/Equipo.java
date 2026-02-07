@@ -6,62 +6,47 @@ public class Equipo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idEquipo;
-	private final int idCliente;
+	private final int idequipo;
+	private final int idcliente;
+	private final String tipo;
 	private final String marca;
 	private final String modelo;
-	private final String numSerie;
-	private final String descripcion;
-
-
-public Equipo(int idEquipo, int idCliente, String marca, String modelo, String numSerie, String descripcion) {
+	private final String numserie;
+	private final String estadoequipo;
+	public Equipo(int idequipo, int idcliente, String tipo, String marca, String modelo, String numserie,
+			String estadoequipo) {
 		super();
-		this.idEquipo = idEquipo;
-		this.idCliente = idCliente;
+		this.idequipo = idequipo;
+		this.idcliente = idcliente;
+		this.tipo = tipo;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.numSerie = numSerie;
-		this.descripcion = descripcion;
+		this.numserie = numserie;
+		this.estadoequipo = estadoequipo;
 	}
-
-
-public int getIdEquipo() {
-	return idEquipo;
-}
-
-
-public int getIdCliente() {
-	return idCliente;
-}
-
-
-public String getMarca() {
-	return marca;
-}
-
-
-public String getModelo() {
-	return modelo;
-}
-
-
-public String getNumSerie() {
-	return numSerie;
-}
-
-
-public String getDescripcion() {
-	return descripcion;
-}
-
-
-@Override
-public String toString() {
-	return "Equipo [idEquipo=" + idEquipo + ", idCliente=" + idCliente + ", marca=" + marca + ", modelo=" + modelo
-			+ ", numSerie=" + numSerie + ", descripcion=" + descripcion + "]";
-}
-
-
-
+	public int getIdequipo() {
+		return idequipo;
+	}
+	public int getIdcliente() {
+		return idcliente;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public String getMarca() {
+		return marca;
+	}
+	public String getModelo() {
+		return modelo;
+	}
+	public String getNumserie() {
+		return numserie;
+	}
+	public String getEstadoequipo() {
+		return estadoequipo;
+	}
+	
 	
 }
+
+

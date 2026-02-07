@@ -3,46 +3,61 @@ package com.uisrael.apipsip.presentacion.dto.request;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class OrdenTrabajoRequestDTO {
-	
 
-	private int idOrden;
+    private int idorden; 
 
     @NotBlank(message = "El código es obligatorio")
     private String codigo;
 
+    @NotNull(message = "Debe vincular esta orden a una solicitud")
+    private Integer idsolicitud; 
 
     @NotNull(message = "Debe seleccionar un cliente")
-    private int idCliente;
+    private Integer idcliente;
 
     @NotNull(message = "Debe asignar un técnico")
-    private int idTecnico;
+    private Integer idtecnico;
 
     @NotNull(message = "Debe seleccionar el tipo de servicio")
-    private int idTipoServicio;
+    private Integer idtipo; 
 
     @NotNull(message = "Debe seleccionar el equipo")
-    private int idEquipo;
+    private Integer idequipo;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechacreacion; // Fecha en que se genera la orden (hoy)
 
     @NotNull(message = "La fecha de solicitud es obligatoria")
-    private LocalDate fechaSolicitud;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechasolicitud;
 
-    @NotNull(message = "La fecha de la cita es obligatoria")
-    private LocalDate fechaCita;
+    @NotNull(message = "Debe seleccionar una fecha para la cita")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechacita;
 
-    @NotNull(message = "La hora de la cita es obligatoria")
-    private LocalTime horaCita;
+    @NotNull(message = "Debe seleccionar una hora para la cita")
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime horacita;
 
     @NotBlank(message = "El estado es obligatorio")
-    private String estado;
+    private String estado; 
 
-    @NotBlank(message = "La descripción es obligatoria")
-    private String descripcionTrabajo;
+    @NotBlank(message = "El número de serie físico es obligatorio")
+    private String numseriereal; 
+
+    @NotBlank(message = "La descripción del trabajo es obligatoria")
+    private String descripciontrabajo;
 
     private String observaciones;
 }
+
+
+

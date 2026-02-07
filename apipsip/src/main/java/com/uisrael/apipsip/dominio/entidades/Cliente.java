@@ -6,23 +6,23 @@ public class Cliente implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private final  int idCliente;
+	private final  int idcliente;
 	private final String nombre;
 	private final String email; 
 	private final String telefono;
 	private final String direccion;
 	private final Boolean estado;
-	public Cliente(int idCliente, String nombre, String email, String telefono, String direccion, Boolean estado) {
+	public Cliente(int idcliente, String nombre, String email, String telefono, String direccion, Boolean estado) {
 		super();
-		this.idCliente = idCliente;
+		this.idcliente = idcliente;
 		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.estado = estado;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdcliente() {
+		return idcliente;
 	}
 	public String getNombre() {
 		return nombre;
