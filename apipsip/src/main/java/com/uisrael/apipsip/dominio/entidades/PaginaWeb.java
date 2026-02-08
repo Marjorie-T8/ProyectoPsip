@@ -9,16 +9,16 @@ public class PaginaWeb implements Serializable {
 
 	private final int idacceso;
 	private final int idorden;
-	private final int ipCliente;
+	private final int ipcliente;
 	private final String userAgent;
 	private final LocalDateTime fechaAcceso;
 	private final String tipoAcceso;
 	
-	public PaginaWeb(int idAcceso, int idOrden, int ipCliente, String userAgent, 
+	public PaginaWeb(int idacceso, int idorden, int ipcliente, String userAgent, 
 			LocalDateTime fechaAcceso, String tipoAcceso) {
-		this.idacceso = idAcceso;
-		this.idorden = idOrden;
-		this.ipCliente = ipCliente;
+		this.idacceso = idacceso;
+		this.idorden = idorden;
+		this.ipcliente = ipcliente;
 		this.userAgent = userAgent;
 		this.fechaAcceso = fechaAcceso;
 		this.tipoAcceso = tipoAcceso;
@@ -33,7 +33,7 @@ public class PaginaWeb implements Serializable {
 	}
 	
 	public int getIpCliente() {
-		return ipCliente;
+		return ipcliente;
 	}
 	
 	public String getUserAgent() {

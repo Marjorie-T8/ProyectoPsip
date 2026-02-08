@@ -16,10 +16,10 @@ public class MensajeCliente implements Serializable {
 	private final LocalDateTime fechaEnvio;
 	private final String estadoEnvio;
 	
-	public MensajeCliente(int idMensaje, int idOrden, String tipoMensaje, String medio, String destinatario, 
+	public MensajeCliente(int idmensaje, int idorden, String tipoMensaje, String medio, String destinatario, 
 			String contenido, LocalDateTime fechaEnvio, String estadoEnvio) {
-		this.idmensaje = idMensaje;
-		this.idorden = idOrden;
+		this.idmensaje = idmensaje;
+		this.idorden = idorden;
 		this.tipoMensaje = tipoMensaje;
 		this.medio = medio;
 		this.destinatario = destinatario;

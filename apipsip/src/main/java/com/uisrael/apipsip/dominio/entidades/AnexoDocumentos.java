@@ -9,19 +9,19 @@ public class AnexoDocumentos implements Serializable {
 
 	private final int idanexo;
 	private final int idorden;
-	private final String nombreOriginal;
-	private final String nombreGuardado;
-	private final String tipoMime;
+	private final String nombreoriginal;
+	private final String nombreguardado;
+	private final String tipomime;
 	private final LocalDateTime fechaSubida;
 	private final boolean estado;
 	
-	public AnexoDocumentos(int idAnexo, int idOrden, String nombreOriginal, String nombreGuardado, 
-			String tipoMime, LocalDateTime fechaSubida, boolean estado) {
-		this.idanexo = idAnexo;
-		this.idorden = idOrden;
-		this.nombreOriginal = nombreOriginal;
-		this.nombreGuardado = nombreGuardado;
-		this.tipoMime = tipoMime;
+	public AnexoDocumentos(int idanexo, int idorden, String nombreoriginal, String nombreguardado, 
+			String tipomime, LocalDateTime fechaSubida, boolean estado) {
+		this.idanexo = idanexo;
+		this.idorden = idorden;
+		this.nombreoriginal = nombreoriginal;
+		this.nombreguardado = nombreguardado;
+		this.tipomime = tipomime;
 		this.fechaSubida = fechaSubida;
 		this.estado = estado;
 	}
@@ -35,15 +35,15 @@ public class AnexoDocumentos implements Serializable {
 	}
 	
 	public String getNombreOriginal() {
-		return nombreOriginal;
+		return nombreoriginal;
 	}
 	
 	public String getNombreGuardado() {
-		return nombreGuardado;
+		return nombreguardado;
 	}
 	
 	public String getTipoMime() {
-		return tipoMime;
+		return tipomime;
 	}
 	
 	public LocalDateTime getFechaSubida() {

@@ -9,19 +9,19 @@ public class HistorialEstado implements Serializable {
 
 	private final int idhistorial;
 	private final int idorden;
-	private final String estadoAnterior;
-	private final String estadoNuevo;
-	private final LocalDateTime fechaCambio;
+	private final String estadoanterior;
+	private final String estadonuevo;
+	private final LocalDateTime fechacambio;
 	private final String observacion;
 	private final String modificadoPor;
 	
-	public HistorialEstado(int idHistorial, int idOrden, String estadoAnterior, String estadoNuevo, 
-			LocalDateTime fechaCambio, String observacion, String modificadoPor) {
-		this.idhistorial = idHistorial;
-		this.idorden = idOrden;
-		this.estadoAnterior = estadoAnterior;
-		this.estadoNuevo = estadoNuevo;
-		this.fechaCambio = fechaCambio;
+	public HistorialEstado(int idhistorial, int idorden, String estadoanterior, String estadonuevo, 
+			LocalDateTime fechacambio, String observacion, String modificadoPor) {
+		this.idhistorial = idhistorial;
+		this.idorden = idorden;
+		this.estadoanterior = estadoanterior;
+		this.estadonuevo = estadonuevo;
+		this.fechacambio = fechacambio;
 		this.observacion = observacion;
 		this.modificadoPor = modificadoPor;
 	}
@@ -35,15 +35,15 @@ public class HistorialEstado implements Serializable {
 	}
 	
 	public String getEstadoAnterior() {
-		return estadoAnterior;
+		return estadoanterior;
 	}
 	
 	public String getEstadoNuevo() {
-		return estadoNuevo;
+		return estadonuevo;
 	}
 	
 	public LocalDateTime getFechaCambio() {
-		return fechaCambio;
+		return fechacambio;
 	}
 	
 	public String getObservacion() {

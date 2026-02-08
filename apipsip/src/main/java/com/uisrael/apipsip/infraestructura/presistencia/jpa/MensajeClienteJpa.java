@@ -25,7 +25,7 @@ public class MensajeClienteJpa implements Serializable {
     private int idOrden;
 
     @Column(name = "tipomensaje")
-    private String tipoMensaje;
+    private String tipomensaje;
 
     private String medio;
 
