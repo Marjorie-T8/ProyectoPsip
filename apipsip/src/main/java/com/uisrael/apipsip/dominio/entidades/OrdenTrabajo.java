@@ -14,8 +14,8 @@ public class OrdenTrabajo implements Serializable {
 
     // FECHAS DIFERENCIADAS
     private final  LocalDate fechacreacion;  // Hoy: El día que el técnico genera la orden
-    private final  LocalDate fechaCita;      // El día que el cliente debe venir (ej: 3 días después)
-    private final  LocalTime horaCita;
+    private final  LocalDate fechacita;      // El día que el cliente debe venir (ej: 3 días después)
+    private final  LocalTime horacita;
     
     // ESTADOS SEGÚN TU LÓGICA
     private final  String estado; // Inicia en 'CONFIRMADO' y se queda así hasta el día de la cita
@@ -37,8 +37,8 @@ public class OrdenTrabajo implements Serializable {
 		this.codigo = codigo;
 		this.idsolicitud = idsolicitud;
 		this.fechacreacion = fechacreacion;
-		this.fechaCita = fechaCita;
-		this.horaCita = horaCita;
+		this.fechacita = fechaCita;
+		this.horacita = horaCita;
 		this.estado = estado;
 		this.idcliente = idcliente;
 		this.idtecnico = idtecnico;
@@ -61,10 +61,10 @@ public class OrdenTrabajo implements Serializable {
 		return fechacreacion;
 	}
 	public LocalDate getFechaCita() {
-		return fechaCita;
+		return fechacita;
 	}
 	public LocalTime getHoraCita() {
-		return horaCita;
+		return horacita;
 	}
 	public String getEstado() {
 		return estado;

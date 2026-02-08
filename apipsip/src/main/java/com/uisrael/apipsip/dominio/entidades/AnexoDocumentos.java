@@ -12,7 +12,7 @@ public class AnexoDocumentos implements Serializable {
 	private final String nombreoriginal;
 	private final String nombreguardado;
 	private final String tipomime;
-	private final LocalDateTime fechaSubida;
+	private final LocalDateTime fechasubida;
 	private final boolean estado;
 	
 	public AnexoDocumentos(int idanexo, int idorden, String nombreoriginal, String nombreguardado, 
@@ -22,7 +22,7 @@ public class AnexoDocumentos implements Serializable {
 		this.nombreoriginal = nombreoriginal;
 		this.nombreguardado = nombreguardado;
 		this.tipomime = tipomime;
-		this.fechaSubida = fechaSubida;
+		this.fechasubida = fechaSubida;
 		this.estado = estado;
 	}
 	
@@ -47,7 +47,7 @@ public class AnexoDocumentos implements Serializable {
 	}
 	
 	public LocalDateTime getFechaSubida() {
-		return fechaSubida;
+		return fechasubida;
 	}
 	
 	public boolean isEstado() {

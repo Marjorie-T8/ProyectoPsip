@@ -9,8 +9,8 @@ public class OrdenTrabajoResponseDTO {
     private int idsolicitud; 
 
     private LocalDate fechacreacion; 
-    private LocalDate fechaCita;     
-    private LocalTime horaCita;
+    private LocalDate fechacita;     
+    private LocalTime horacita;
     
     
     private String estado; 
@@ -49,16 +49,16 @@ public class OrdenTrabajoResponseDTO {
 		this.fechacreacion = fechacreacion;
 	}
 	public LocalDate getFechaCita() {
-		return fechaCita;
+		return fechacita;
 	}
 	public void setFechaCita(LocalDate fechaCita) {
-		this.fechaCita = fechaCita;
+		this.fechacita = fechaCita;
 	}
 	public LocalTime getHoraCita() {
-		return horaCita;
+		return horacita;
 	}
 	public void setHoraCita(LocalTime horaCita) {
-		this.horaCita = horaCita;
+		this.horacita = horaCita;
 	}
 	public String getEstado() {
 		return estado;

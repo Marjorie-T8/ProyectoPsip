@@ -9,23 +9,23 @@ public class MensajeCliente implements Serializable {
 
 	private final int idmensaje;
 	private final int idorden;
-	private final String tipoMensaje;
+	private final String tipomensaje;
 	private final String medio;
 	private final String destinatario;
 	private final String contenido;
-	private final LocalDateTime fechaEnvio;
-	private final String estadoEnvio;
+	private final LocalDateTime fechaenvio;
+	private final String estadoenvio;
 	
-	public MensajeCliente(int idmensaje, int idorden, String tipoMensaje, String medio, String destinatario, 
-			String contenido, LocalDateTime fechaEnvio, String estadoEnvio) {
+	public MensajeCliente(int idmensaje, int idorden, String tipomensaje, String medio, String destinatario, 
+			String contenido, LocalDateTime fechaenvio, String estadoEnvio) {
 		this.idmensaje = idmensaje;
 		this.idorden = idorden;
-		this.tipoMensaje = tipoMensaje;
+		this.tipomensaje = tipomensaje;
 		this.medio = medio;
 		this.destinatario = destinatario;
 		this.contenido = contenido;
-		this.fechaEnvio = fechaEnvio;
-		this.estadoEnvio = estadoEnvio;
+		this.fechaenvio = fechaenvio;
+		this.estadoenvio = estadoEnvio;
 	}
 	
 	public int getIdMensaje() {
@@ -37,7 +37,7 @@ public class MensajeCliente implements Serializable {
 	}
 	
 	public String getTipoMensaje() {
-		return tipoMensaje;
+		return tipomensaje;
 	}
 	
 	public String getMedio() {
@@ -53,10 +53,10 @@ public class MensajeCliente implements Serializable {
 	}
 	
 	public LocalDateTime getFechaEnvio() {
-		return fechaEnvio;
+		return fechaenvio;
 	}
 	
 	public String getEstadoEnvio() {
-		return estadoEnvio;
+		return estadoenvio;
 	}
 }

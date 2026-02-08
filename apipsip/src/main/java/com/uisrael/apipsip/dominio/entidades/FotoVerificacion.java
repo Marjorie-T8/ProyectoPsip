@@ -11,14 +11,14 @@ public class FotoVerificacion implements Serializable {
 	private final int idorden;
 	private final String rutaarchivo;
 	private final String descripcion;
-	private final LocalDateTime fechaRegistro;
+	private final LocalDateTime fecharegistro;
 	
 	public FotoVerificacion(int idfoto, int idorden, String rutaarchivo, String descripcion, LocalDateTime fechaRegistro) {
 		this.idfoto = idfoto;
 		this.idorden = idorden;
 		this.rutaarchivo = rutaarchivo;
 		this.descripcion = descripcion;
-		this.fechaRegistro = fechaRegistro;
+		this.fecharegistro = fechaRegistro;
 	}
 	
 	public int getIdFoto() {
@@ -38,6 +38,6 @@ public class FotoVerificacion implements Serializable {
 	}
 	
 	public LocalDateTime getFechaRegistro() {
-		return fechaRegistro;
+		return fecharegistro;
 	}
 }
