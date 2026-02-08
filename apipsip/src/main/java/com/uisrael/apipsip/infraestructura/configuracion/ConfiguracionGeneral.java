@@ -11,7 +11,6 @@ import com.uisrael.apipsip.aplicacion.casosuso.entradas.IHistorialEstadoUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.IInformeFinalUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.IMensajeClienteUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.IOrdenTrabajoUseCase;
-import com.uisrael.apipsip.aplicacion.casosuso.entradas.IPaginaWebUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.ISolicitudServicioUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.ITecnicoUseCase;
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.ITipoServicioUseCase;
@@ -23,7 +22,6 @@ import com.uisrael.apipsip.dominio.repositorios.IHistorialEstadoRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.IInformeFinalRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.IMensajeClienteRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.IOrdenTrabajoRepositorio;
-import com.uisrael.apipsip.dominio.repositorios.IPaginaWebRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.ISolicitudServicioRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.ITecnicoRepositorio;
 import com.uisrael.apipsip.dominio.repositorios.ITipoServicioRepositorio;
@@ -35,7 +33,6 @@ import com.uisrael.apipsip.infraestructura.respositorios.IHistorialEstadoJpaRepo
 import com.uisrael.apipsip.infraestructura.respositorios.IInformeFinalJpaRepositorio;
 import com.uisrael.apipsip.infraestructura.respositorios.IMensajeClienteJpaRepositorio;
 import com.uisrael.apipsip.infraestructura.respositorios.IOrdenTrabajoJpaRepositorio;
-import com.uisrael.apipsip.infraestructura.respositorios.IPaginaWebJpaRepositorio;
 import com.uisrael.apipsip.infraestructura.respositorios.ISolicitudServicioJpaRepositorio;
 import com.uisrael.apipsip.infraestructura.respositorios.ITecnicoJpaRepositorio;
 import com.uisrael.apipsip.infraestructura.respositorios.ITipoServicioJpaRepositorio;
@@ -47,7 +44,6 @@ import com.uisrael.apipsip.aplicacion.casosuso.impl.HistorialEstadoUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.InformeFinalUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.MensajeClienteUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.OrdenTrabajoUseCaseImpl;
-import com.uisrael.apipsip.aplicacion.casosuso.impl.PaginaWebUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.SolicitudServicioUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.TecnicoUseCaseImpl;
 import com.uisrael.apipsip.aplicacion.casosuso.impl.TipoServicioUseCaseImpl;
@@ -59,7 +55,6 @@ import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.HistorialEst
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.InformeFinalRepositorioImpl;
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.MensajeClienteRepositorioImpl;
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.OrdenTrabajoRepositorioImpl;
-import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.PaginaWebRepositorioImpl;
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.SolicitudServicioRepositorioImpl;
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.TecnicoRepositorioImpl;
 import com.uisrael.apipsip.infraestructura.presistencia.adaptadores.TipoServicioRepositorioImpl;
@@ -71,7 +66,6 @@ import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IHistorialEst
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IInformeFinalJpaMapper;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IMensajeClienteJpaMapper;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IOrdenTrabajoJpaMapper;
-import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.IPaginaWebJpaMapper;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.ISolicitudServicioJpaMapper;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.ITecnicoJpaMapper;
 import com.uisrael.apipsip.infraestructura.presistencia.mapeadores.ITipoServicioJpaMapper;
@@ -135,11 +129,6 @@ public class ConfiguracionGeneral {
 		}
 		
 		@Bean
-		IPaginaWebUseCase paginaWebUseCase(IPaginaWebRepositorio repositorio) {
-			return new PaginaWebUseCaseImpl(repositorio);
-		}
-		
-	    @Bean
 		IClienteRepositorio clienterepositorio(IClienteJpaRepositorio jparepositorio, IClienteJpaMapper  mapper) {
 	    	
 			return new ClienteRepositorioImpl(jparepositorio, mapper);
@@ -193,9 +182,5 @@ public class ConfiguracionGeneral {
 			return new MensajeClienteRepositorioImpl(jpaRepository, mapper);
 		}
 		
-		@Bean
-		IPaginaWebRepositorio paginaWebRepositorio(IPaginaWebJpaRepositorio jpaRepository, IPaginaWebJpaMapper mapper) {
-			return new PaginaWebRepositorioImpl(jpaRepository, mapper);
-		}
-
+		
 }

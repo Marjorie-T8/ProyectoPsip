@@ -15,14 +15,14 @@ public class FotoVerificacionJpa implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idfoto")
-    private int idFoto;
+    private int idfoto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", insertable = false, updatable = false)
     private OrdenTrabajoJpa ordenTrabajo;
 
     @Column(name = "idorden")
-    private int idOrden;
+    private int idorden;
 
     @Column(name = "rutaarchivo")
     private String rutaArchivo;

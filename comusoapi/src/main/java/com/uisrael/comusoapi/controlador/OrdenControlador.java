@@ -102,11 +102,11 @@ public class OrdenControlador {
         OrdenTrabajoResponseDTO ordenEncontrada = servicioOrden.buscarOrdenTrabajoPorId(id);
         
     
-        model.addAttribute("orden", ordenEncontrada); 
+        model.addAttribute("orden", ordenEncontrada);
         
         return "orden/verorden";
     }
-    @GetMapping("/consultar")
+  @GetMapping("/consultar")
     public String consultarToken(@RequestParam String token, @RequestParam(required = false) String rol, Model model) {
         model.addAttribute("rol", rol);
         OrdenTrabajoResponseDTO orden = servicioOrden.buscarPorToken(token);

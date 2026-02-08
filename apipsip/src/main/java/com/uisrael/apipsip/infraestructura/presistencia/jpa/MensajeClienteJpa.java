@@ -15,14 +15,14 @@ public class MensajeClienteJpa implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idmensaje")
-    private int idMensaje;
+    private int idmensaje;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", insertable = false, updatable = false)
     private OrdenTrabajoJpa ordenTrabajo;
 
     @Column(name = "idorden")
-    private int idOrden;
+    private int idorden;
 
     @Column(name = "tipomensaje")
     private String tipomensaje;

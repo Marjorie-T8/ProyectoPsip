@@ -15,14 +15,14 @@ public class HistorialEstadoJpa implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idhistorial")
-    private int idHistorial;
+    private int idhistorial;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", insertable = false, updatable = false)
     private OrdenTrabajoJpa ordenTrabajo;
 
     @Column(name = "idorden")
-    private int idOrden;
+    private int idorden;
 
     @Column(name = "estadoanterior")
     private String estadoAnterior;

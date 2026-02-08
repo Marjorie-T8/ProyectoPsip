@@ -15,14 +15,14 @@ public class AnexoDocumentosJpa implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idanexo")
-    private int idAnexo;
+    private int idanexo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", insertable = false, updatable = false)
     private OrdenTrabajoJpa ordenTrabajo;
 
     @Column(name = "idorden")
-    private int idOrden;
+    private int idorden;
 
     @Column(name = "nombreoriginal")
     private String nombreOriginal;

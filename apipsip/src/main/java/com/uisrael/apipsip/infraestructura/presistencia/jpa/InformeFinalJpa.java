@@ -14,7 +14,7 @@ public class InformeFinalJpa implements Serializable {
     private int idinforme;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idorden", nullable = false)
-    private OrdenTrabajoJpa orden;
+    private OrdenTrabajoJpa ordenTrabajo;
     @Column(columnDefinition = "TEXT")
     private String detallefinal;
     private double costorepuestos;
