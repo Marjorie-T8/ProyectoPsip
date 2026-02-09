@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="plantilla/plantillaui">
+<head>
+    <title>Gestión de Equipos</title>
+</head>
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title text-primary">Gestión de Equipos</h4>
+                    <p class="card-subtitle">
+                        Equipos asociados al cliente: <span class="fw-bold text-dark" th:text="${nombreCliente}">Nombre</span>
+                    </p>
+                </div>
+                <div class="ms-auto">
+                    <a th:href="@{/equipo/nuevo(idCliente=${idCliente})}" class="btn btn-success text-white">
+                        <i class="mdi mdi-plus"></i> Nuevo Equipo
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+                <table id="zero_config" class="table table-striped table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>N° Serie</th>
+                            <th>Descripción</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="e : ${listaequipos}">
+                            <td th:text="${e.idEquipo}"></td>
+                            <td th:text="${e.marca}" class="fw-bold"></td>
+                            <td th:text="${e.modelo}"></td>
+                            <td>
+                                <span class="badge bg-light text-dark border" th:text="${e.numserie}">S/N</span>
+                            </td>
+                            <td th:text="${e.descripcion}"></td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a th:href="@{/equipo/editar/{id}(id=${e.idEquipo})}" 
+                                       class="btn btn-info btn-sm text-white" title="Editar">
+                                       <i class="mdi mdi-pencil"></i>
+                                    </a>
+                                    <a th:href="@{/equipo/eliminar/{id}(id=${e.idEquipo})}" 
+                                       class="btn btn-danger btn-sm" 
+                                       onclick="return confirm('¿Seguro que desea eliminar este equipo?')" title="Eliminar">
+                                       <i class="mdi mdi-delete"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="border-top pt-3 mt-2">
+                <a th:href="@{/cliente/listar}" class="btn btn-secondary">
+                    <i class="mdi mdi-arrow-left"></i> Volver a Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

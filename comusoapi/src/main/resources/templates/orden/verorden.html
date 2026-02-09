@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="text-dark">Detalle Maestro de la Orden</h3>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row" th:if="${orden != null}">
+            
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <h6 class="m-0 font-weight-bold text-primary">Información Técnica</h6>
+                        <span class="badge p-2" 
+                              th:classappend="${orden.estado == 'PENDIENTE' ? 'bg-warning text-dark' : 'bg-success text-white'}"
+                              th:text="${orden.estado}">PENDIENTE</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Código de Orden</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${orden.codigo}">OT-000</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Programada</div>
+                            <div class="h6 mb-0 text-gray-800">
+                                <i class="mdi mdi-calendar"></i> <span th:text="${orden.fechaCita}">2026-02-05</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Descripción del Trabajo</div>
+                            <p class="mb-0 text-gray-800" th:text="${orden.descripcionTrabajo}">Detalles...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-header py-3 bg-white">
+                        <h6 class="m-0 font-weight-bold text-info">Asignación de Cliente y Equipo</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Cliente Responsable</div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                <i class="mdi mdi-account text-info"></i> 
+                                <span th:text="${orden.nombreCliente != null ? orden.nombreCliente : 'ID Cliente: ' + orden.idCliente}"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Equipo a Intervenir</div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                <i class="mdi mdi-laptop mr-2 text-info"></i> 
+                                <span th:text="${orden.nombreEquipo != null ? orden.nombreEquipo : 'ID Equipo: ' + orden.idEquipo}"></span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Técnico Asignado</div>
+                            <div class="h6 mb-0 text-gray-800 font-weight-bold">
+                                <i class="mdi mdi-wrench text-info"></i>
+                                <span th:text="${orden.nombreTecnico != null ? orden.nombreTecnico : 'ID Técnico: ' + orden.idTecnico}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a th:href="@{/orden/listar}" class="btn btn-secondary shadow-sm mx-1">
+                    <i class="mdi mdi-arrow-left"></i> Volver al Listado
+                </a>
+                <button onclick="window.print();" class="btn btn-primary shadow-sm mx-1">
+                    <i class="mdi mdi-printer"></i> Imprimir Orden
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

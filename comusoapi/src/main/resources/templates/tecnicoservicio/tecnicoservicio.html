@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary"><i class="mdi mdi-account-plus me-2"></i>NUEVO TÉCNICO</h4>
+                        <hr>
+                        <form th:action="@{/tecnico/guardar}" th:object="${tecnicoDTO}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Nombre Completo</label>
+                                <input type="text" th:field="*{nombre}" class="form-control border-primary" placeholder="Ej: Juan Pérez" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Correo Electrónico</label>
+                                <input type="email" th:field="*{email}" class="form-control" placeholder="nombre@icpe.com.ec">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Teléfono de Contacto</label>
+                                <input type="text" th:field="*{telefono}" class="form-control" placeholder="0999999999">
+                            </div>
+                            <div class="border-top pt-3 text-end">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="mdi mdi-content-save"></i> Guardar Técnico
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title text-success"><i class="mdi mdi-settings me-2"></i>NUEVO TIPO DE SERVICIO</h4>
+                        <hr>
+                        <form th:action="@{/tiposervicio/guardar}" th:object="${tipoServicioDTO}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Nombre del Servicio</label>
+                                <input type="text" th:field="*{nombre}" class="form-control border-success" placeholder="Ej: Mantenimiento Preventivo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Descripción Detallada</label>
+                                <textarea th:field="*{descripcion}" class="form-control" rows="4" placeholder="Detalle en qué consiste este servicio..."></textarea>
+                            </div>
+                            <div class="border-top pt-3 text-end">
+                                <button type="submit" class="btn btn-success text-white">
+                                    <i class="mdi mdi-content-save"></i> Guardar Servicio
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

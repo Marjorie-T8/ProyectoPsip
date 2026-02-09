@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title text-primary">GENERAR ÓRDEN DE TRABAJO - ICPE S.A.S.</h4>
+                <hr>
+
+                <form th:action="@{/orden/nueva}" method="get" id="formFiltro" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">1. Seleccione el Cliente</label>
+                            <select name="idCliente" class="form-select border-primary" onchange="this.form.submit()">
+                                <option value="0">-- Seleccione Cliente --</option>
+                                <option th:each="c : ${listaclientes}" 
+                                        th:value="${c.idCliente}" 
+                                        th:text="${c.nombre}"
+                                        th:selected="${c.idCliente == idClienteSeleccionado}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <form th:action="@{/orden/guardar}" th:object="${ordenDTO}" method="post" 
+                      th:if="${idClienteSeleccionado != null and idClienteSeleccionado > 0}">
+                    
+                    <input type="hidden" th:field="*{idCliente}" />
+                    <input type="hidden" th:field="*{estado}" />
+                    
+                  
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">2. Equipo a Intervenir</label>
+                            <select th:field="*{idEquipo}" class="form-select" required>
+                                <option value="0">-- Seleccione Equipo --</option>
+                                <option th:each="e : ${listaequipos}" 
+                                        th:value="${e.idEquipo}" 
+                                        th:text="${e.marca + ' ' + e.modelo}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Técnico Asignado</label>
+                            <select th:field="*{idTecnico}" class="form-select" required>
+                                <option value="0">-- Seleccione Técnico --</option> 
+                                <option th:each="t : ${listatecnicos}" 
+                                        th:value="${t.idTecnico}" 
+                                        th:text="${t.nombre}"></option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Tipo de Servicio</label>
+                            <select th:field="*{idTipoServicio}" class="form-select" required>
+                                <option value="0">-- Seleccione Servicio --</option> 
+                                <option th:each="s : ${listaservicios}" 
+                                        th:value="${s.idTipo}" 
+                                        th:text="${s.nombre}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Fecha de la Cita (Agendada)</label>
+                            <input type="date" th:field="*{fechaCita}" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Hora de la Cita</label>
+                            <input type="time" th:field="*{horaCita}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripción del Requerimiento</label>
+                        <textarea th:field="*{descripcionTrabajo}" class="form-control" rows="3" 
+                                  placeholder="Detalle el problema..." required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Observaciones Adicionales</label>
+                        <textarea th:field="*{observaciones}" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <input type="hidden" th:field="*{fechaSolicitud}" />
+
+                    <div class="border-top pt-3 text-end">
+                        <a th:href="@{/orden/listar}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-content-save"></i> Crear Orden
+                        </button>
+                    </div>
+                </form>
+                
+                <div th:unless="${idClienteSeleccionado != null and idClienteSeleccionado > 0}" class="text-center py-5">
+                    <i class="mdi mdi-account-search mdi-48px text-muted"></i>
+                    <p class="text-muted">Seleccione un cliente para continuar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

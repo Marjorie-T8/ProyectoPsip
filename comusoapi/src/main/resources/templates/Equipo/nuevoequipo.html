@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/plantilla/plantillaui">
+<head>
+    <title>Nuevo Cliente</title>
+</head>
+<body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title text-primary">INGRESO DE EQUIPO NUEVO - ICPE S.A.S.</h4>
+                <hr>
+
+                <form th:action="@{/equipo/guardar}" th:object="${equipoDTO}" method="post" class="mt-4">
+                    <input type="hidden" th:field="*{idEquipo}" />
+                    <input type="hidden" th:field="*{idCliente}" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Marca</label>
+                            <input type="text" th:field="*{marca}" class="form-control border-primary" placeholder="Ej: Dell, HP, Lenovo..." required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Modelo</label>
+                            <input type="text" th:field="*{modelo}" class="form-control" placeholder="Ej: Latitude 3420" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                       <div class="col-md-6">
+    <label class="form-label fw-bold">Número de Serie</label>
+    <input type="text" th:field="*{numserie}" class="form-control" 
+           placeholder="Ej: SN12345678" required />
+</div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Descripción del Equipo</label>
+                            <textarea th:field="*{descripcion}" class="form-control" rows="2" placeholder="Ej: Laptop color negro, incluye cargador..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="py-2"></div>
+
+                    <div class="border-top pt-3 text-end">
+                        <a th:href="@{/equipo/listarPorCliente/{id}(id=${idCliente})}" class="btn btn-secondary px-4">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="mdi mdi-content-save"></i> Guardar Equipo
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var errorStatus = /*[[${error}]]*/ 'no-llega';
+
+    if (errorStatus === "EL EQUIPO EXISTE REVISAR") {
+        Swal.fire({
+            title: '¡Equipo Duplicado!',
+            text: 'El número de serie ya está registrado. Haz clic en aceptar para ver los equipos del cliente.',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var idCli = /*[[${idCliente}]]*/ 0;
+                window.location.href = '/equipo/listarPorCliente/' + idCli;
+            }
+        });
+    }
+    /*]]>*/
+</script>
+</body>
+</html>
