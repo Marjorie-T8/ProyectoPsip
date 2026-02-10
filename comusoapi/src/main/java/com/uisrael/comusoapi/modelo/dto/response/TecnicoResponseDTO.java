@@ -6,9 +6,9 @@ import lombok.Data;
 public class TecnicoResponseDTO {
 	private int idTecnico;
 	private  String nombre;
-	private  String email;
+	private String cedula;
+	private  String email;	
 	private String telefono;
-	private boolean activo;
-	
+	private Boolean activo;
 
 }

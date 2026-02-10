@@ -45,31 +45,34 @@ public class OrdenControlador {
     @Autowired
     private IEquipoServicio servicioEquipo;
 
+ // OrdenControlador.java (Proyecto Frontend)
     @GetMapping("/nueva")
-    public String mostrarFormularioNueva(@RequestParam(name = "idCliente", required = false) Integer idCliente, Model model) {
-        OrdenTrabajoRequestDTO ordenDTO = new OrdenTrabajoRequestDTO();
+    public String nuevaOrden(@RequestParam(name = "idCliente", required = false, defaultValue = "0") int idCliente, Model model) {
         
-      
-        if (idCliente != null && idCliente > 0) {
-            ordenDTO.setIdCliente(idCliente);
-            ordenDTO.setEstado("PENDIENTE"); 
-            ordenDTO.setFechaSolicitud(LocalDate.now()); 
+  
+        model.addAttribute("listaclientes", servicioCliente.listarCliente());          
+        model.addAttribute("listaservicios", servicioTipo.listarTipoServicio());        
+        model.addAttribute("listatecnicos", servicioTecnico.listarTecnico());
+
+        OrdenTrabajoRequestDTO ordenDTO = new OrdenTrabajoRequestDTO();
+        ordenDTO.setEstado("PENDIENTE");
+        ordenDTO.setFechaSolicitud(LocalDate.now());
+
+        if (idCliente > 0) {
+            // Buscamos la info del cliente para mostrar la Cédula/RUC
+            var cliente = servicioCliente.buscarClientePorId(idCliente);
+            model.addAttribute("clienteInfo", cliente); 
             
-          
+            // Cargamos los equipos filtrados por cliente
             model.addAttribute("listaequipos", servicioEquipo.listarEquiposPorCliente(idCliente));
+            
+            ordenDTO.setIdCliente(idCliente);
+            model.addAttribute("idClienteSeleccionado", idCliente);
         }
 
         model.addAttribute("ordenDTO", ordenDTO);
-        model.addAttribute("idClienteSeleccionado", idCliente);
-        
-      
-        model.addAttribute("listaclientes", servicioCliente.listarCliente());
-        model.addAttribute("listatecnicos", servicioTecnico.listarTecnico());
-        model.addAttribute("listaservicios", servicioTipo.listarTipoServicio());
-
         return "orden/nuevaorden";
     }
-
     @PostMapping("/guardar")
     public String guardarOrden(@ModelAttribute("ordenDTO") OrdenTrabajoRequestDTO ordenDTO, RedirectAttributes flash) {
         try {

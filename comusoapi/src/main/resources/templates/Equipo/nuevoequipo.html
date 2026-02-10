@@ -4,51 +4,59 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="/plantilla/plantillaui">
 <head>
-    <title>Nuevo Cliente</title>
+    <title>Gestión de Equipo</title>
 </head>
 <body>
 <div layout:fragment="contenidopaginas">
     <div class="container-fluid">
         <div class="card shadow">
             <div class="card-body">
-                <h4 class="card-title text-primary">INGRESO DE EQUIPO NUEVO - ICPE S.A.S.</h4>
+                <h4 class="card-title text-primary" 
+                    th:text="${equipoDTO.idEquipo != null and equipoDTO.idEquipo > 0 ? 'EDITAR EQUIPO - ICPE S.A.S.' : 'INGRESO DE EQUIPO NUEVO - ICPE S.A.S.'}">
+                </h4>
                 <hr>
 
-                <form th:action="@{/equipo/guardar}" th:object="${equipoDTO}" method="post" class="mt-4">
+                <form th:action="@{/equipo/guardar}"
+                      th:object="${equipoDTO}"
+                      method="post"
+                      class="mt-4">
+
                     <input type="hidden" th:field="*{idEquipo}" />
                     <input type="hidden" th:field="*{idCliente}" />
+                    <input type="hidden" th:field="*{activo}" /> 
+
+                    <input type="hidden" id="errorMsg" th:value="${error}" />
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Marca</label>
-                            <input type="text" th:field="*{marca}" class="form-control border-primary" placeholder="Ej: Dell, HP, Lenovo..." required />
+                            <input type="text" th:field="*{marca}" class="form-control border-primary" required />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Modelo</label>
-                            <input type="text" th:field="*{modelo}" class="form-control" placeholder="Ej: Latitude 3420" required />
+                            <input type="text" th:field="*{modelo}" class="form-control" required />
                         </div>
                     </div>
 
                     <div class="row">
-                       <div class="col-md-6">
-    <label class="form-label fw-bold">Número de Serie</label>
-    <input type="text" th:field="*{numserie}" class="form-control" 
-           placeholder="Ej: SN12345678" required />
-</div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Número de Serie (Único)</label>
+                            <input type="text" th:field="*{numserie}" class="form-control" 
+                                   maxlength="20" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')" required />
+                        </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label fw-bold">Descripción del Equipo</label>
-                            <textarea th:field="*{descripcion}" class="form-control" rows="2" placeholder="Ej: Laptop color negro, incluye cargador..."></textarea>
+                            <label class="form-label fw-bold">Descripción</label>
+                            <textarea th:field="*{descripcion}" class="form-control" rows="2"></textarea>
                         </div>
                     </div>
-
-                    <div class="py-2"></div>
 
                     <div class="border-top pt-3 text-end">
                         <a th:href="@{/equipo/listarPorCliente/{id}(id=${idCliente})}" class="btn btn-secondary px-4">
                             Cancelar
                         </a>
                         <button type="submit" class="btn btn-primary px-4">
-                            <i class="mdi mdi-content-save"></i> Guardar Equipo
+                            <i class="mdi mdi-content-save"></i>
+                            <span th:text="${equipoDTO.idEquipo != null and equipoDTO.idEquipo > 0 ? 'Actualizar Equipo' : 'Guardar Equipo'}"></span>
                         </button>
                     </div>
                 </form>
@@ -56,24 +64,25 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    var errorStatus = /*[[${error}]]*/ 'no-llega';
 
-    if (errorStatus === "EL EQUIPO EXISTE REVISAR") {
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtenemos el valor del input oculto
+    var errorStatus = document.getElementById("errorMsg").value;
+
+    if (errorStatus && errorStatus.trim() !== "") {
         Swal.fire({
-            title: '¡Equipo Duplicado!',
-            text: 'El número de serie ya está registrado. Haz clic en aceptar para ver los equipos del cliente.',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var idCli = /*[[${idCliente}]]*/ 0;
-                window.location.href = '/equipo/listarPorCliente/' + idCli;
-            }
+            title: errorStatus.toUpperCase().includes("EXISTE") || errorStatus.toUpperCase().includes("DUPLICADO") 
+                   ? '¡Registro Duplicado!' 
+                   : 'Atención',
+            text: errorStatus,
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3085d6'
         });
     }
-    /*]]>*/
+});
 </script>
 </body>
 </html>

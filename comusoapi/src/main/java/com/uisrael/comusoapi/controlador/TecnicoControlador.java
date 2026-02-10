@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.uisrael.comusoapi.modelo.dto.request.TecnicoRequestDTO;
 
@@ -36,8 +36,14 @@ public class TecnicoControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute("tecnicoDTO") TecnicoRequestDTO dto) {
-        servicioTecnico.crearTecnico(dto);
-        return "redirect:/tecnico/listar";
+    public String guardar(@ModelAttribute("tecnicoDTO") TecnicoRequestDTO dto, Model model) {
+        try {
+            servicioTecnico.crearTecnico(dto);
+            return "redirect:/tecnico/listar";
+        } catch (WebClientResponseException.Conflict ex) {
+            model.addAttribute("tecnicoDTO", dto);
+            model.addAttribute("error", "LA CÉDULA YA ESTÁ REGISTRADA");
+            return "tecnico/nuevotecnico";
+        }
     }
 }

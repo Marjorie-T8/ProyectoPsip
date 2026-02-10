@@ -6,9 +6,8 @@ import lombok.Data;
 public class TipoServicioRequestDTO {
 
 	private int idTipo;
-
 	private String nombre;
-
 	private  String descripcion;
+	private Boolean activo;
 
 }

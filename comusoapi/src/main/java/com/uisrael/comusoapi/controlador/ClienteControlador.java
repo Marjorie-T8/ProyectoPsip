@@ -32,41 +32,56 @@ public class ClienteControlador {
 
     @GetMapping("/nuevo")
     public String nuevoCliente(Model model) {
-        model.addAttribute("cliente", new ClienteRequestDTO());
+        ClienteRequestDTO nuevo = new ClienteRequestDTO();
+        nuevo.setEstado(true); 
+        model.addAttribute("cliente", nuevo);
         return "cliente/nuevocliente";
     }
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute("cliente") ClienteRequestDTO cliente, Model model) {
         try {
-            // El controlador sigue sin lógica, solo llama al servicio
-            servicioCliente.crearCliente(cliente);
+            // Validamos si el ID es nulo antes de comparar. 
+            // Si es null, asumimos que es un registro nuevo (0).
+            Integer idActual = (cliente.getIdCliente() != null) ? cliente.getIdCliente() : 0;
+
+            if (idActual > 0) {
+                servicioCliente.actualizarCliente(idActual, cliente);
+            } else {
+                servicioCliente.crearCliente(cliente);
+            }
             return "redirect:/cliente/listar";
+            
         } catch (WebClientResponseException.Conflict ex) {
-            // ESTO ES PARA LA CÉDULA DUPLICADA
             model.addAttribute("cliente", cliente);
-            model.addAttribute("error", "EL CLIENTE YA EXISTE REVISA LISTAR CLIENTE"); 
-            return "cliente/nuevocliente"; 
+            // Aquí también usamos la validación segura para el mensaje
+            boolean esEdicion = cliente.getIdCliente() != null && cliente.getIdCliente() > 0;
+            String mensaje = esEdicion ? "LA CÉDULA YA PERTENECE A OTRO CLIENTE" : "EL CLIENTE YA EXISTE";
+            
+            model.addAttribute("error", mensaje);
+            return "cliente/nuevocliente";
         } catch (Exception ex) {
-            // ESTO ATRAPA EL ERROR 400 QUE ESTÁS TENIENDO
             model.addAttribute("cliente", cliente);
-            model.addAttribute("error", "Error técnico: " + ex.getMessage());
+            model.addAttribute("error", "Error: " + ex.getMessage());
             return "cliente/nuevocliente";
         }
     }
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable int id) {
-        // Tu borrado lógico ocurre dentro de este método en el Backend
+        
         servicioCliente.eliminarCliente(id);
         return "redirect:/cliente/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String editarCliente(@PathVariable int id, Model model) {
+        
         ClienteResponseDTO cliente = servicioCliente.buscarClientePorId(id); 
         
-        // Importante: El formulario debe ser capaz de leer tanto RequestDTO como ResponseDTO
+       
+        System.out.println("Fecha recibida del backend: " + cliente.getFechaNacimiento());
+        
         model.addAttribute("cliente", cliente);
-        model.addAttribute("esEdicion", true); // Útil para cambiar el título en el HTML
+        model.addAttribute("esEdicion", true);
         return "cliente/nuevocliente"; 
     }
 }
