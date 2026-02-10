@@ -7,30 +7,29 @@ import java.time.LocalTime;
 public class OrdenTrabajo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private final int idOrden;
-	private final String codigo;
-	private final int idCliente;
-    private final int idTecnico;
-    private final int idTipoServicio;
-    private final int idEquipo;
-	private final LocalDate fechaSolicitud;
-	private final LocalDate fechaCita; 
-    private final LocalTime horaCita;
-	private final String estado;
-	private final String descripcionTrabajo;
-	private final String observaciones;
-	private final Boolean activo;
-	public OrdenTrabajo(int idOrden, String codigo, int idCliente, int idTecnico, int idTipoServicio, int idEquipo,
-			LocalDate fechaSolicitud, LocalDate fechaCita, LocalTime horaCita, String estado, String descripcionTrabajo,
-			String observaciones, Boolean activo) {
+	private final Integer idOrden;
+    private final String codigo;
+    private final Cliente cliente;        
+    private final Tecnico tecnico;        
+    private final TipoServicio tipoServicio; 
+    private final Equipo equipo;
+    private final LocalDate fechaSolicitud; 
+    private final LocalDate fechaCita; 
+    private final LocalTime horaCita;    
+    private final String estado;
+    private final String descripcionTrabajo; 
+    private final String observaciones;
+    private final Boolean activo;
+	public OrdenTrabajo(Integer idOrden, String codigo, Cliente cliente, Tecnico tecnico, TipoServicio tipoServicio,
+			Equipo equipo, LocalDate fechaSolicitud, LocalDate fechaCita, LocalTime horaCita, String estado,
+			String descripcionTrabajo, String observaciones, Boolean activo) {
 		super();
 		this.idOrden = idOrden;
 		this.codigo = codigo;
-		this.idCliente = idCliente;
-		this.idTecnico = idTecnico;
-		this.idTipoServicio = idTipoServicio;
-		this.idEquipo = idEquipo;
+		this.cliente = cliente;
+		this.tecnico = tecnico;
+		this.tipoServicio = tipoServicio;
+		this.equipo = equipo;
 		this.fechaSolicitud = fechaSolicitud;
 		this.fechaCita = fechaCita;
 		this.horaCita = horaCita;
@@ -38,27 +37,24 @@ public class OrdenTrabajo implements Serializable {
 		this.descripcionTrabajo = descripcionTrabajo;
 		this.observaciones = observaciones;
 		this.activo = activo;
-
-	
-	
-}
-	public int getIdOrden() {
+	}
+	public Integer getIdOrden() {
 		return idOrden;
 	}
 	public String getCodigo() {
 		return codigo;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public int getIdTecnico() {
-		return idTecnico;
+	public Tecnico getTecnico() {
+		return tecnico;
 	}
-	public int getIdTipoServicio() {
-		return idTipoServicio;
+	public TipoServicio getTipoServicio() {
+		return tipoServicio;
 	}
-	public int getIdEquipo() {
-		return idEquipo;
+	public Equipo getEquipo() {
+		return equipo;
 	}
 	public LocalDate getFechaSolicitud() {
 		return fechaSolicitud;
@@ -81,5 +77,7 @@ public class OrdenTrabajo implements Serializable {
 	public Boolean getActivo() {
 		return activo;
 	}
+	
+	
 }
 	

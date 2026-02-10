@@ -103,15 +103,28 @@ public class OrdenControlador {
         }
         return "redirect:/orden/listar";
     }
- 
+
     @GetMapping("/ver/{id}")
-    public String ver(@PathVariable int id, Model model) {
-        OrdenTrabajoResponseDTO ordenEncontrada = servicioOrden.buscarOrdenTrabajoPorId(id);
-        
-    
-        model.addAttribute("orden", ordenEncontrada); 
-        
-        return "orden/verorden";
+    public String ver(@PathVariable int id, Model model, RedirectAttributes flash) {
+        try {
+            
+            OrdenTrabajoResponseDTO ordenEncontrada = servicioOrden.buscarOrdenTrabajoPorId(id);
+            
+            if (ordenEncontrada == null) {
+                flash.addFlashAttribute("mensaje", "La orden no existe");
+                flash.addFlashAttribute("tipo", "error");
+                return "redirect:/orden/listar";
+            }
+
+            model.addAttribute("orden", ordenEncontrada); 
+            
+            return "orden/verorden"; 
+            
+        } catch (Exception e) {
+            flash.addFlashAttribute("mensaje", "Error al conectar con el servidor: " + e.getMessage());
+            flash.addFlashAttribute("tipo", "error");
+            return "redirect:/orden/listar";
+        }
     }
 }
    

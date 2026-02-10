@@ -15,55 +15,33 @@ public class OrdenTrabajoJpa implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idorden")
-    private int idOrden;
-	@Column(name = "codigo", unique = true)
-    private String codigo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idcliente", insertable = false, updatable = false)
+    @Column(name = "idorden") 
+    private Integer idOrden;
+    @Column(name = "codigo", unique = true, nullable = false)
+    private String codigo;      
+   @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente") 
     private ClienteJpa cliente;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idtecnico", insertable = false, updatable = false)
+    @JoinColumn(name = "idtecnico")
     private TecnicoJpa tecnico;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idtipo", insertable = false, updatable = false)
+    @JoinColumn(name = "idtiposervicio")
     private TipoServicioJpa tipoServicio;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idequipo", insertable = false, updatable = false)
+    @JoinColumn(name = "idequipo")
     private EquipoJpa equipo;
-
-    @Column(name = "idcliente")
-    private int idCliente;
-
-    @Column(name = "idtecnico")
-    private int idTecnico;
-
-    @Column(name = "idtipo")
-    private int idTipoServicio;
-
-    @Column(name = "idequipo")
-    private int idEquipo;
-
-    @Column(name = "fechasolicitud") 
-    private LocalDate fechaSolicitud;
-
-    @Column(name = "fechaagendada") 
-    private LocalDate fechaCita;
-
-    @Column(name = "horaagendada")  
-    private LocalTime horaCita;
-
-    private String estado;
-
-    @Column(name = "descripciontrabajo") 
-    private String descripcionTrabajo;
-
+    @Column(name = "fechasolicitud")
+    private LocalDate fechaSolicitud; 
+    @Column(name = "fechacita")
+    private LocalDate fechaCita; 
+    @Column(name = "hora_cita")
+    private LocalTime horaCita;    
+   private String estado;
+   @Column(name = "descripcion_trabajo", length = 1000)
+    private String descripcionTrabajo; 
+    @Column(name = "observaciones", length = 1000)
     private String observaciones;
-    @Column(name = "activo")
-    private Boolean activo = true;
+    private Boolean activo;
 }
 	

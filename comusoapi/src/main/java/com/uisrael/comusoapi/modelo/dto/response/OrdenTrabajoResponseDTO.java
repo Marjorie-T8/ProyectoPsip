@@ -7,17 +7,23 @@ import lombok.Data;
 
 @Data
 public class OrdenTrabajoResponseDTO {
-	private int idOrden;
+	private Integer idOrden;
     private String codigo;
-    private int idCliente;       
-    private int idTecnico;   
-    private int idTipoServicio;
-    private int idEquipo;   
-    private LocalDate fechaSolicitud;
-    private LocalDate fechaCita;
-    private LocalTime horaCita;    
     private String estado;
-    private String descripcionTrabajo;
+    private int idCliente;
+    private String nombreCliente;
+    private String cedulaRuc; 
+    private int idTecnico;
+    private String nombreTecnico;
+    private int idEquipo;
+    private String nombreEquipo; 
+    private String numSerie;
+    private int idTipoServicio;
+    private String nombreTipoServicio;
+    private LocalDate fechaSolicitud; 
+    private LocalDate fechaCita; 
+    private LocalTime horaCita;
+    private String descripcionTrabajo; 
     private String observaciones;
     private Boolean activo;
 	    

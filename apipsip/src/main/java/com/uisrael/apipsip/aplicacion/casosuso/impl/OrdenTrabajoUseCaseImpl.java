@@ -18,18 +18,16 @@ public class OrdenTrabajoUseCaseImpl implements IOrdenTrabajoUseCase {
 
     @Override
     public OrdenTrabajo crear(OrdenTrabajo ordenOriginal) {
-       
         String nuevoCodigo = "OT-" + java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 
-        
         OrdenTrabajo ordenParaGuardar = new OrdenTrabajo(
             ordenOriginal.getIdOrden(),
-            nuevoCodigo,         
-            ordenOriginal.getIdCliente(),
-            ordenOriginal.getIdTecnico(),
-            ordenOriginal.getIdTipoServicio(),
-            ordenOriginal.getIdEquipo(),
+            nuevoCodigo,
+            ordenOriginal.getCliente(),
+            ordenOriginal.getTecnico(),
+            ordenOriginal.getTipoServicio(),
+            ordenOriginal.getEquipo(),
             ordenOriginal.getFechaSolicitud(),
             ordenOriginal.getFechaCita(),
             ordenOriginal.getHoraCita(),
@@ -39,23 +37,34 @@ public class OrdenTrabajoUseCaseImpl implements IOrdenTrabajoUseCase {
             ordenOriginal.getActivo()
         );
 
-     
         return repositorio.guardar(ordenParaGuardar);
     }
+
+  
     @Override
     public void eliminar(int id) {
-        OrdenTrabajo ex = obtenerPorId(id);
-
-     
+       
+        OrdenTrabajo orden = obtenerPorId(id);
         OrdenTrabajo inactiva = new OrdenTrabajo(
-            ex.getIdOrden(), ex.getCodigo(), ex.getIdCliente(), ex.getIdTecnico(),
-            ex.getIdTipoServicio(), ex.getIdEquipo(), ex.getFechaSolicitud(),
-            ex.getFechaCita(), ex.getHoraCita(), ex.getEstado(),
-            ex.getDescripcionTrabajo(), ex.getObservaciones(), 
+            orden.getIdOrden(),
+            orden.getCodigo(),
+            orden.getCliente(),
+            orden.getTecnico(),
+            orden.getTipoServicio(),
+            orden.getEquipo(),
+            orden.getFechaSolicitud(),
+            orden.getFechaCita(),
+            orden.getHoraCita(),
+            orden.getEstado(),
+            orden.getDescripcionTrabajo(),
+            orden.getObservaciones(),
             false 
         );
+
+       
         repositorio.guardar(inactiva);
     }
+
     @Override
     public OrdenTrabajo obtenerPorId(int id) {
         return repositorio.buscarPorId(id)
