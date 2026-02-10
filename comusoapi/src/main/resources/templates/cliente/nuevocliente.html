@@ -2,108 +2,83 @@
 <html dir="ltr" lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="/plantilla/plantillaui">
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
     <title>Nuevo Cliente</title>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 <div layout:fragment="contenidopaginas">
     <div class="container-fluid">
         <div class="card shadow">
             <div class="card-body">
-                <h4 class="card-title text-primary">REGISTRO RÁPIDO DE CLIENTE - ICPE S.A.S.</h4>
+                <h4 class="card-title text-primary" 
+                    th:text="${cliente.idCliente != null and cliente.idCliente > 0 ? 'EDITAR CLIENTE - ICPE S.A.S.' : 'REGISTRO RÁPIDO DE CLIENTE - ICPE S.A.S.'}">
+                </h4>
                 <hr>
-                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-				    <strong></strong> <span th:text="${error}"></span>
-				    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
 
                 <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post" class="mt-4">
-                    
-                    <input type="hidden" name="idCliente" th:value="${cliente.idCliente != null ? cliente.idCliente : 0}" />
+                    <input type="hidden" th:field="*{idCliente}" />
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Nombre Completo</label>
-                            <input type="text" th:field="*{nombre}" class="form-control border-primary" 
-                                   placeholder="Ej: Juan Pérez" required />
+                            <input type="text" th:field="*{nombre}" class="form-control border-primary" placeholder="Ej: Juan Pérez" required />
                         </div>
-                        <div class="row mb-3">
-							    <div class="col-md-12">
-							        <label class="form-label fw-bold">Número de Cédula</label>
-							        <input type="text" th:field="*{cedula}" class="form-control border-primary" 
-							               placeholder="Ej: 17xxxxxxx-x" required />
-							    </div>
-							</div>
-						  <div class="col-md-6">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Número de Cédula</label>
+                            <input type="text" th:field="*{cedula}" class="form-control border-primary" maxlength="10" 
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" required />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <label class="form-label fw-bold">Dirección de Domicilio</label>
-                            <input type="text" th:field="*{direccion}" class="form-control" 
-                                   placeholder="Calle principal y secundaria" />
+                            <input type="text" th:field="*{direccion}" class="form-control" />
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label class="form-label fw-bold">Correo Electrónico</label>
-                            <input type="email" th:field="*{email}" class="form-control" 
-                                   placeholder="correo@ejemplo.com" />
+                            <input type="email" th:field="*{email}" class="form-control" />
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label fw-bold">Teléfono de Contacto</label>
-                            <input type="text" th:field="*{telefono}" class="form-control" 
-                                   placeholder="0999999999" />
-                                   
+                            <label class="form-label fw-bold">Teléfono</label>
+                            <input type="text" th:field="*{telefono}" class="form-control" maxlength="10" />
                         </div>
                         <div class="col-md-4">
-						    <label class="form-label fw-bold">Fecha de Nacimiento</label>
-						    <input type="date" th:field="*{fechaNacimiento}" class="form-control" required />
-						</div>
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">Estado del Cliente</label>
-                            <select th:field="*{estado}" class="form-select">
-                                <option th:value="true">Activo</option>
-                                <option th:value="false">Inactivo</option>
-                            </select>
+                            <label class="form-label fw-bold">Fecha de Nacimiento</label>
+                            <input type="date" th:field="*{fechaNacimiento}" class="form-control" required />
                         </div>
+                        <input type="hidden" th:field="*{estado}" />
                     </div>
-
-                    <div class="py-3"></div>
 
                     <div class="border-top pt-3 text-end">
                         <a th:href="@{/cliente/listar}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="mdi mdi-content-save"></i> Guardar Cliente
+                            <i class="mdi mdi-content-save"></i> 
+                            <span th:text="${cliente.idCliente != null and cliente.idCliente > 0 ? 'Actualizar' : 'Guardar'}"></span>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    
-    // 1. Verificamos en la consola del navegador (F12) si llega el valor
-    var errorStatus = /*[[${error}]]*/ 'no-llega';
-    console.log("Estado del error:", errorStatus);
 
-    // 2. Si llega "EXISTE", lanzamos el aviso
-    if (errorStatus === "EL CLIENTE EXISTE REVISAR") {
-        Swal.fire({
-            title: '¡Cliente ya registrado!',
-            text: 'La cédula ingresada ya existe. Dale a aceptar para ir al listado.',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar',
-            allowOutsideClick: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = /*[[@{/cliente/listar}]]*/ '/cliente/listar';
-            }
-        });
-    }
-    
-    /*]]>*/
-</script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var errorStatus = /*[[${error}]]*/ '';
+        if (errorStatus) {
+            Swal.fire({
+                title: 'Atención',
+                text: errorStatus,
+                icon: errorStatus.includes('EXISTE') ? 'warning' : 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+        /*]]>*/
+    </script>
+</div>
 </body>
 </html>

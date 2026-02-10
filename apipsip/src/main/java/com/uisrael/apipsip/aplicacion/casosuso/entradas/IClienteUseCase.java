@@ -11,5 +11,5 @@ public interface IClienteUseCase {
 	List<Cliente> listar();
 	void eliminar (int id);
 	
-	Cliente actualizar(int id, Cliente cliente);
+	Cliente actualizar(Integer id, Cliente cliente);
 }

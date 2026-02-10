@@ -7,5 +7,5 @@ public class TipoServicioResponseDTO {
 	private int idTipo;
 	private String nombre;
 	private  String descripcion;
-	
+	private Boolean activo;
 }

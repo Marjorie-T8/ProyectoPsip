@@ -46,9 +46,14 @@ public class  TecnicoRepositorioImpl implements ITecnicoRepositorio{
 	}
 
 	@Override
+
 	public void eliminar(int id) {
-		jpaRepository.deleteById(id);
-		
+	    jpaRepository.deleteById(id);
 	}
 
+	@Override
+	public Optional<Tecnico> buscarPorCedula(String cedula) {
+	   
+	    return jpaRepository.findByCedula(cedula).map(entityMapper::toDomain);
+	}
 }

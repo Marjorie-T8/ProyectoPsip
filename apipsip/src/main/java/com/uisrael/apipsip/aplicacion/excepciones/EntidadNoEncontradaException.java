@@ -1,10 +1,9 @@
 package com.uisrael.apipsip.aplicacion.excepciones;
 
-
-
-public class EquipoDuplicadoException extends RuntimeException {
+public class EntidadNoEncontradaException extends RuntimeException {
     private static final long serialVersionUID = 1L;
-    public EquipoDuplicadoException(String mensaje) {
+	public EntidadNoEncontradaException(String mensaje) {
         super(mensaje);
     }
+
 }

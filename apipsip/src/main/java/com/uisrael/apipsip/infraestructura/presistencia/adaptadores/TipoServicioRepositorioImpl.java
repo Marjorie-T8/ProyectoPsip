@@ -46,7 +46,14 @@ public class TipoServicioRepositorioImpl implements ITipoServicioRepositorio {
     }
 
     @Override
+    public Optional<TipoServicio> buscarPorNombre(String nombre) {
+        return jpaRepository.findByNombre(nombre)
+                .map(entityMapper::toDomain);
+    }
+
+    @Override
     public void eliminar(int id) {
+      
         jpaRepository.deleteById(id);
     }
 }

@@ -2,33 +2,33 @@ package com.uisrael.apipsip.presentacion.dto.response;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 public class OrdenTrabajoResponseDTO {
 
-	private int idorden;
+	private Integer idOrden;
     private String codigo;
-    private int idsolicitud; 
-
-    private LocalDate fechacreacion; 
-    private LocalDate fechacita;     
-    private LocalTime horacita;
-    
-    
-    private String estado; 
-    
-    private int idcliente;
-    private int idtecnico;
-    private int idequipo;
-    private int idtiposervicio;
-
-
-    private String numseriereal; 
-    private String descripcionTrabajo;
+    private String estado;
+    private int idCliente;
+    private String nombreCliente;
+    private String cedulaRuc; 
+    private int idTecnico;
+    private String nombreTecnico;
+    private int idEquipo;
+    private String nombreEquipo; 
+    private String numSerie;
+    private int idTipoServicio;
+    private String nombreTipoServicio;
+    private LocalDate fechaSolicitud; 
+    private LocalDate fechaCita; 
+    private LocalTime horaCita;
+    private String descripcionTrabajo; 
     private String observaciones;
-	public int getIdorden() {
-		return idorden;
+    private Boolean activo;
+	public Integer getIdOrden() {
+		return idOrden;
 	}
-	public void setIdorden(int idorden) {
-		this.idorden = idorden;
+	public void setIdOrden(Integer idOrden) {
+		this.idOrden = idOrden;
 	}
 	public String getCodigo() {
 		return codigo;
@@ -36,65 +36,89 @@ public class OrdenTrabajoResponseDTO {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public int getIdsolicitud() {
-		return idsolicitud;
-	}
-	public void setIdsolicitud(int idsolicitud) {
-		this.idsolicitud = idsolicitud;
-	}
-	public LocalDate getFechacreacion() {
-		return fechacreacion;
-	}
-	public void setFechacreacion(LocalDate fechacreacion) {
-		this.fechacreacion = fechacreacion;
-	}
-	public LocalDate getFechaCita() {
-		return fechacita;
-	}
-	public void setFechaCita(LocalDate fechaCita) {
-		this.fechacita = fechaCita;
-	}
-	public LocalTime getHoraCita() {
-		return horacita;
-	}
-	public void setHoraCita(LocalTime horaCita) {
-		this.horacita = horaCita;
-	}
 	public String getEstado() {
 		return estado;
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public int getIdcliente() {
-		return idcliente;
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setIdcliente(int idcliente) {
-		this.idcliente = idcliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-	public int getIdtecnico() {
-		return idtecnico;
+	public String getNombreCliente() {
+		return nombreCliente;
 	}
-	public void setIdtecnico(int idtecnico) {
-		this.idtecnico = idtecnico;
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
 	}
-	public int getIdequipo() {
-		return idequipo;
+	public String getCedulaRuc() {
+		return cedulaRuc;
 	}
-	public void setIdequipo(int idequipo) {
-		this.idequipo = idequipo;
+	public void setCedulaRuc(String cedulaRuc) {
+		this.cedulaRuc = cedulaRuc;
 	}
-	public int getIdtiposervicio() {
-		return idtiposervicio;
+	public int getIdTecnico() {
+		return idTecnico;
 	}
-	public void setIdtiposervicio(int idtiposervicio) {
-		this.idtiposervicio = idtiposervicio;
+	public void setIdTecnico(int idTecnico) {
+		this.idTecnico = idTecnico;
 	}
-	public String getNumseriereal() {
-		return numseriereal;
+	public String getNombreTecnico() {
+		return nombreTecnico;
 	}
-	public void setNumseriereal(String numseriereal) {
-		this.numseriereal = numseriereal;
+	public void setNombreTecnico(String nombreTecnico) {
+		this.nombreTecnico = nombreTecnico;
+	}
+	public int getIdEquipo() {
+		return idEquipo;
+	}
+	public void setIdEquipo(int idEquipo) {
+		this.idEquipo = idEquipo;
+	}
+	public String getNombreEquipo() {
+		return nombreEquipo;
+	}
+	public void setNombreEquipo(String nombreEquipo) {
+		this.nombreEquipo = nombreEquipo;
+	}
+	public String getNumSerie() {
+		return numSerie;
+	}
+	public void setNumSerie(String numSerie) {
+		this.numSerie = numSerie;
+	}
+	public int getIdTipoServicio() {
+		return idTipoServicio;
+	}
+	public void setIdTipoServicio(int idTipoServicio) {
+		this.idTipoServicio = idTipoServicio;
+	}
+	public String getNombreTipoServicio() {
+		return nombreTipoServicio;
+	}
+	public void setNombreTipoServicio(String nombreTipoServicio) {
+		this.nombreTipoServicio = nombreTipoServicio;
+	}
+	public LocalDate getFechaSolicitud() {
+		return fechaSolicitud;
+	}
+	public void setFechaSolicitud(LocalDate fechaSolicitud) {
+		this.fechaSolicitud = fechaSolicitud;
+	}
+	public LocalDate getFechaCita() {
+		return fechaCita;
+	}
+	public void setFechaCita(LocalDate fechaCita) {
+		this.fechaCita = fechaCita;
+	}
+	public LocalTime getHoraCita() {
+		return horaCita;
+	}
+	public void setHoraCita(LocalTime horaCita) {
+		this.horaCita = horaCita;
 	}
 	public String getDescripcionTrabajo() {
 		return descripcionTrabajo;
@@ -108,6 +132,12 @@ public class OrdenTrabajoResponseDTO {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+	public Boolean getActivo() {
+		return activo;
+	}
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
 	
-    
+ 
 }

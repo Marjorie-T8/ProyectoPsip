@@ -9,11 +9,13 @@ public class TecnicoRequestDTO {
 	private int idTecnico;
 	@NotBlank
 	private  String nombre;
+	@NotBlank(message = "La cédula es obligatoria")
+    private String cedula;
 	@NotBlank
 	private  String email;
 	@NotBlank
 	private String telefono;
 	@NotBlank
-	private boolean activo;
+	private Boolean activo;
 
 }

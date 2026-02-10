@@ -7,82 +7,66 @@ import java.time.LocalTime;
 public class OrdenTrabajo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private final int idorden;
+	private final Integer idOrden;
     private final String codigo;
-    private final  int idsolicitud; // El vínculo con el ticket original
-
-    // FECHAS DIFERENCIADAS
-    private final  LocalDate fechacreacion;  // Hoy: El día que el técnico genera la orden
-    private final  LocalDate fechacita;      // El día que el cliente debe venir (ej: 3 días después)
-    private final  LocalTime horacita;
-    
-    // ESTADOS SEGÚN TU LÓGICA
-    private final  String estado; // Inicia en 'CONFIRMADO' y se queda así hasta el día de la cita
-    
-    private final  int idcliente;
-    private final  int idtecnico;
-    private final  int idequipo;
-    private final int idtiposervicio;
-
-    // Estos se llenan RECIÉN el día de la cita
-    private final String numseriereal; 
-    private final String descripcionTrabajo;
-    private final  String observaciones;
-	public OrdenTrabajo(int idorden, String codigo, int idsolicitud, LocalDate fechacreacion, LocalDate fechaCita,
-			LocalTime horaCita, String estado, int idcliente, int idtecnico, int idequipo, int idtiposervicio,
-			String numseriereal, String descripcionTrabajo, String observaciones) {
+    private final Cliente cliente;        
+    private final Tecnico tecnico;        
+    private final TipoServicio tipoServicio; 
+    private final Equipo equipo;
+    private final LocalDate fechaSolicitud; 
+    private final LocalDate fechaCita; 
+    private final LocalTime horaCita;    
+    private final String estado;
+    private final String descripcionTrabajo; 
+    private final String observaciones;
+    private final Boolean activo;
+	public OrdenTrabajo(Integer idOrden, String codigo, Cliente cliente, Tecnico tecnico, TipoServicio tipoServicio,
+			Equipo equipo, LocalDate fechaSolicitud, LocalDate fechaCita, LocalTime horaCita, String estado,
+			String descripcionTrabajo, String observaciones, Boolean activo) {
 		super();
-		this.idorden = idorden;
+		this.idOrden = idOrden;
 		this.codigo = codigo;
-		this.idsolicitud = idsolicitud;
-		this.fechacreacion = fechacreacion;
-		this.fechacita = fechaCita;
-		this.horacita = horaCita;
+		this.cliente = cliente;
+		this.tecnico = tecnico;
+		this.tipoServicio = tipoServicio;
+		this.equipo = equipo;
+		this.fechaSolicitud = fechaSolicitud;
+		this.fechaCita = fechaCita;
+		this.horaCita = horaCita;
 		this.estado = estado;
-		this.idcliente = idcliente;
-		this.idtecnico = idtecnico;
-		this.idequipo = idequipo;
-		this.idtiposervicio = idtiposervicio;
-		this.numseriereal = numseriereal;
 		this.descripcionTrabajo = descripcionTrabajo;
 		this.observaciones = observaciones;
+		this.activo = activo;
 	}
-	public int getIdorden() {
-		return idorden;
+	public Integer getIdOrden() {
+		return idOrden;
 	}
 	public String getCodigo() {
 		return codigo;
 	}
-	public int getIdsolicitud() {
-		return idsolicitud;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public LocalDate getFechacreacion() {
-		return fechacreacion;
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
+	public TipoServicio getTipoServicio() {
+		return tipoServicio;
+	}
+	public Equipo getEquipo() {
+		return equipo;
+	}
+	public LocalDate getFechaSolicitud() {
+		return fechaSolicitud;
 	}
 	public LocalDate getFechaCita() {
-		return fechacita;
+		return fechaCita;
 	}
 	public LocalTime getHoraCita() {
-		return horacita;
+		return horaCita;
 	}
 	public String getEstado() {
 		return estado;
-	}
-	public int getIdcliente() {
-		return idcliente;
-	}
-	public int getIdtecnico() {
-		return idtecnico;
-	}
-	public int getIdequipo() {
-		return idequipo;
-	}
-	public int getIdtiposervicio() {
-		return idtiposervicio;
-	}
-	public String getNumseriereal() {
-		return numseriereal;
 	}
 	public String getDescripcionTrabajo() {
 		return descripcionTrabajo;
@@ -90,9 +74,10 @@ public class OrdenTrabajo implements Serializable {
 	public String getObservaciones() {
 		return observaciones;
 	}
+	public Boolean getActivo() {
+		return activo;
+	}
 	
 	
-    
 }
-	    
 	

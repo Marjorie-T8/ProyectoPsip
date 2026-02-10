@@ -13,6 +13,7 @@ public interface ITipoServicioRepositorio {
 	Optional<TipoServicio> buscarPorId(int id);
 	List<TipoServicio> listarTodos();
 	void eliminar(int id);
+	Optional<TipoServicio> buscarPorNombre(String nombre);
 
 }
 

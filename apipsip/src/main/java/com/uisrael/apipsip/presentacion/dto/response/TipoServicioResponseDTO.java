@@ -4,6 +4,7 @@ public class TipoServicioResponseDTO {
 	private int idTipo;
 	private String nombre;
 	private  String descripcion;
+	private Boolean activo;
 	public int getIdTipo() {
 		return idTipo;
 	}
@@ -22,5 +23,11 @@ public class TipoServicioResponseDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+	public Boolean getActivo() {
+		return activo;
+	}
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+	
 }

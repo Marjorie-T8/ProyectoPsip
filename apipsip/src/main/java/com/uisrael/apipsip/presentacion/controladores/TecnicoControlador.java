@@ -40,9 +40,9 @@ public class TecnicoControlador {
         );
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
-        tecnicoUseCase.eliminar(id);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<TecnicoResponseDTO> actualizar(@PathVariable int id, @Valid @RequestBody TecnicoRequestDTO request) {
+        var actualizado = tecnicoUseCase.actualizar(id, mapper.toDomain(request));
+        return ResponseEntity.ok(mapper.toResponseDto(actualizado));
     }
 }

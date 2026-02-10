@@ -13,6 +13,7 @@ public interface IOrdenTrabajoRepositorio {
 	Optional<OrdenTrabajo> buscarPorId(int id);
 	List<OrdenTrabajo> listarTodos();
 	void eliminar(int id);
+	Optional<OrdenTrabajo> buscarPorCodigo(String codigo);
 
 }
 

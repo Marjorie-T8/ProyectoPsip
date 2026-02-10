@@ -6,17 +6,19 @@ public class TipoServicio implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idtipo;
+	private final int idTipo;
 	private final String nombre;
 	private final String descripcion;
-	public TipoServicio(int idtipo, String nombre, String descripcion) {
+	private final  Boolean activo;
+	public TipoServicio(int idTipo, String nombre, String descripcion, Boolean activo) {
 		super();
-		this.idtipo = idtipo;
+		this.idTipo = idTipo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.activo = activo;
 	}
-	public int getIdtipo() {
-		return idtipo;
+	public int getIdTipo() {
+		return idTipo;
 	}
 	public String getNombre() {
 		return nombre;
@@ -24,6 +26,11 @@ public class TipoServicio implements Serializable {
 	public String getDescripcion() {
 		return descripcion;
 	}
-
+	public Boolean getActivo() {
+		return activo;
+	}
+	
+	
+	
 	
 }

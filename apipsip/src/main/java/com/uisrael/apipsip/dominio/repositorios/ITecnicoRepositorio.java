@@ -13,6 +13,7 @@ public interface ITecnicoRepositorio {
 	Optional<Tecnico> buscarPorId(int id);
 	List<Tecnico> listarTodos();
 	void eliminar(int id);
+	Optional<Tecnico> buscarPorCedula(String cedula);
 
 }
 

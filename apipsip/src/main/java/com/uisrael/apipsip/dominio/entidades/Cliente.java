@@ -7,7 +7,7 @@ public class Cliente implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private final  int idCliente;
+	private final  Integer idCliente;
 	private final String cedula;         
     private final String nombre;
     private final String email;
@@ -15,7 +15,7 @@ public class Cliente implements Serializable {
     private final String direccion;
     private final LocalDate fechaNacimiento; 
     private final Boolean estado;
-	public Cliente(int idCliente, String cedula, String nombre, String email, String telefono, String direccion,
+	public Cliente(Integer idCliente, String cedula, String nombre, String email, String telefono, String direccion,
 			LocalDate fechaNacimiento, Boolean estado) {
 		super();
 		this.idCliente = idCliente;
@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.estado = estado;
 	}
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 	public String getCedula() {
@@ -51,6 +51,7 @@ public class Cliente implements Serializable {
 	public Boolean getEstado() {
 		return estado;
 	}
+	
 	
 	
 	

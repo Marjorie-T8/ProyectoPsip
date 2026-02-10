@@ -4,24 +4,30 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import lombok.Data;
+
 @Data
 public class OrdenTrabajoResponseDTO {
-
-	private int idorden;
+	private Integer idOrden;
     private String codigo;
-    private int idsolicitud; 
-
-    private LocalDate fechacreacion;  
-    private LocalDate fechaCita;     
+    private String estado;
+    private int idCliente;
+    private String nombreCliente;
+    private String cedulaRuc; 
+    private int idTecnico;
+    private String nombreTecnico;
+    private int idEquipo;
+    private String nombreEquipo; 
+    private String numSerie;
+    private int idTipoServicio;
+    private String nombreTipoServicio;
+    private LocalDate fechaSolicitud; 
+    private LocalDate fechaCita; 
     private LocalTime horaCita;
-  
-    private String estado;    
-    private int idcliente;
-    private int idtecnico;
-    private int idequipo;
-    private int idtiposervicio;
-    private String numseriereal; 
-    private String descripcionTrabajo;
+    private String descripcionTrabajo; 
     private String observaciones;
+    private Boolean activo;
+	    
+	    
+	}
     
-}
+    
