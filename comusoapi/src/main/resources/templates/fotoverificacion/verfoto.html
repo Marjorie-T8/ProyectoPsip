@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Detalle de Foto</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="text-dark">Detalle de Foto de Verificación</h3>
+                <hr>
+            </div>
+        </div>
 
+        <div class="row" th:if="${foto != null}">
+            
+            <div class="col-md-8 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-header py-3 bg-white">
+                        <h6 class="m-0 font-weight-bold text-primary">Vista Previa de la Foto</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <img th:src="@{${foto.rutaArchivo}}" class="img-fluid rounded" 
+                             style="max-width: 600px; max-height: 500px; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <h6 class="m-0 font-weight-bold text-info">Información de la Foto</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">ID Foto</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${foto.idFoto}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Orden Relacionada</div>
+                            <div class="h6 mb-0 text-gray-800">
+                                <i class="mdi mdi-format-list-bulleted"></i> <span th:text="${foto.idOrden}"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Descripción</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${foto.descripcion}"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Fecha de Registro</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${#temporals.format(foto.fechaRegistro, 'dd/MM/yyyy HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a th:href="@{/fotoverificacion/listar(idOrden=${foto.idOrden})}" class="btn btn-secondary shadow-sm mx-1">
+                    <i class="mdi mdi-arrow-left"></i> Volver al Listado
+                </a>
+                <a th:href="@{${foto.rutaArchivo}}" class="btn btn-success shadow-sm mx-1" target="_blank">
+                    <i class="mdi mdi-download"></i> Descargar Foto
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Detalle del Anexo</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="text-dark">Detalle del Documento Adjunto</h3>
+                <hr>
+            </div>
+        </div>
 
+        <div class="row" th:if="${anexo != null}">
+            
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <h6 class="m-0 font-weight-bold text-primary">Información del Documento</h6>
+                        <span class="badge p-2" 
+                              th:classappend="${anexo.estado ? 'bg-success text-white' : 'bg-danger text-white'}"
+                              th:text="${anexo.estado ? 'Activo' : 'Inactivo'}"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ID Anexo</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${anexo.idAnexo}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orden Relacionada</div>
+                            <div class="h6 mb-0 text-gray-800">
+                                <i class="mdi mdi-format-list-bulleted"></i> <span th:text="${anexo.idOrden}"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre Original</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${anexo.nombreOriginal}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Nombre Guardado</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${anexo.nombreGuardado}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tipo MIME</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${anexo.tipoMime}"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha de Subida</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${#temporals.format(anexo.fechaSubida, 'dd/MM/yyyy HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-header py-3 bg-white">
+                        <h6 class="m-0 font-weight-bold text-info">Acciones Disponibles</h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <a th:href="@{${anexo.rutaArchivo}}" class="btn btn-success btn-lg mb-3" target="_blank" style="width: 100%;">
+                            <i class="mdi mdi-download mdi-24px"></i><br>
+                            Descargar Documento
+                        </a>
+                        
+                        <div class="alert alert-info">
+                            <i class="mdi mdi-information-outline"></i>
+                            <strong>Nota:</strong> Este documento está adjunto a la orden de trabajo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a th:href="@{/anexodocumento/listar(idOrden=${anexo.idOrden})}" class="btn btn-secondary shadow-sm mx-1">
+                    <i class="mdi mdi-arrow-left"></i> Volver al Listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

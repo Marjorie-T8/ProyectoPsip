@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Lista de Fotos</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title">Fotos de Verificación</h4>
+                    <p class="card-subtitle">Imágenes del trabajo realizado</p>
+                </div>
+                <div class="ms-auto">
+                    <a th:href="@{/fotoverificacion/nueva(idOrden=${idOrden})}" class="btn btn-success text-white">
+                        <i class="mdi mdi-camera-plus"></i> Nueva Foto
+                    </a>
+                </div>
+            </div>
 
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4" th:each="f : ${listafotos}">
+                    <div class="card shadow-sm">
+                        <img th:src="@{${f.rutaArchivo}}" class="card-img-top" alt="Foto de verificación" 
+                             style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h6 class="card-title" th:text="${f.descripcion}"></h6>
+                            <p class="text-muted small">
+                                <i class="mdi mdi-calendar"></i> 
+                                <span th:text="${#temporals.format(f.fechaRegistro, 'dd/MM/yyyy HH:mm')}"></span>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/fotoverificacion/ver/{id}(id=${f.idFoto})}" class="btn btn-sm btn-info text-white">
+                                    <i class="mdi mdi-eye"></i> Ver
+                                </a>
+                                <a th:href="@{/fotoverificacion/eliminar/{id}(id=${f.idFoto})}" 
+                                   class="btn btn-sm btn-danger" 
+                                   onclick="return confirm('¿Seguro que desea eliminar esta foto?')">
+                                    <i class="mdi mdi-delete"></i> Eliminar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

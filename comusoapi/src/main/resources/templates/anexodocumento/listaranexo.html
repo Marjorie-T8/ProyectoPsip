@@ -1,11 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Lista de Anexos</title>
 </head>
 <body>
-	<p>Hola mundo</p>
-	<h1>UIsrael</h1>
+<div layout:fragment="contenidopaginas">
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title">Documentos Adjuntos</h4>
+                    <p class="card-subtitle">Archivos relacionados con la orden</p>
+                </div>
+                <div class="ms-auto">
+                    <a th:href="@{/anexodocumento/nuevo(idOrden=${idOrden})}" class="btn btn-success text-white">
+                        <i class="mdi mdi-file-plus"></i> Nuevo Documento
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre Original</th>
+                            <th>Tipo</th>
+                            <th>Fecha Subida</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="a : ${listaanexos}">
+                            <td th:text="${a.nombreOriginal}"></td>
+                            <td>
+                                <span th:if="${a.tipoMime.contains('pdf')}" class="badge bg-danger">PDF</span>
+                                <span th:if="${a.tipoMime.contains('image')}" class="badge bg-info">Imagen</span>
+                                <span th:if="${a.tipoMime.contains('word')}" class="badge bg-primary">Word</span>
+                                <span th:if="${a.tipoMime.contains('excel')}" class="badge bg-success">Excel</span>
+                                <span th:unless="${a.tipoMime.contains('pdf') or a.tipoMime.contains('image') or a.tipoMime.contains('word') or a.tipoMime.contains('excel')}" class="badge bg-secondary">Archivo</span>
+                            </td>
+                            <td th:text="${#temporals.format(a.fechaSubida, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td>
+                                <span th:if="${a.estado}" class="badge rounded-pill bg-success">Activo</span>
+                                <span th:unless="${a.estado}" class="badge rounded-pill bg-danger">Inactivo</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a th:href="@{/anexodocumento/ver/{id}(id=${a.idAnexo})}" class="btn btn-info btn-sm text-white">
+                                        <i class="mdi mdi-eye"></i>
+                                    </a>
+                                    <a th:href="@{${a.rutaArchivo}}" class="btn btn-success btn-sm" target="_blank">
+                                        <i class="mdi mdi-download"></i>
+                                    </a>
+                                    <a th:href="@{/anexodocumento/eliminar/{id}(id=${a.idAnexo})}" 
+                                       class="btn btn-danger btn-sm" 
+                                       onclick="return confirm('¿Seguro que desea eliminar este documento?')">
+                                        <i class="mdi mdi-delete"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

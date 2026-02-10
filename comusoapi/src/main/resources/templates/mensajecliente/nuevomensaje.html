@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Nuevo Mensaje</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title text-primary">ENVIAR MENSAJE</h4>
+                <hr>
 
+                <form th:action="@{/mensajeciente/enviar}" method="post" id="formMensaje">
+                    <input type="hidden" name="idorden" th:value="${idorden}">
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Tipo de Mensaje</label>
+                            <select name="tipomensaje" class="form-select border-primary" required>
+                                <option value="">-- Seleccione Tipo --</option>
+                                <option value="INFORMATIVO">Informativo</option>
+                                <option value="NOTIFICACION">Notificación</option>
+                                <option value="SOPORTE">Soporte</option>
+                                <option value="CONFIRMACION">Confirmación</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Medio de Envío</label>
+                            <select name="medio" class="form-select border-primary" required>
+                                <option value="">-- Seleccione Medio --</option>
+                                <option value="EMAIL">Email</option>
+                                <option value="SMS">SMS</option>
+                                <option value="WHATSAPP">WhatsApp</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold">Destinatario (Email/Teléfono)</label>
+                            <input type="text" name="destinatario" class="form-control border-primary" 
+                                   placeholder="ejemplo@email.com" required>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Estado Inicial</label>
+                            <select name="estadoenvio" class="form-select border-primary" required>
+                                <option value="PENDIENTE">Pendiente</option>
+                                <option value="ENVIADO">Enviado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Contenido del Mensaje</label>
+                        <textarea name="contenido" class="form-control border-primary" rows="6" 
+                                  placeholder="Escriba el contenido del mensaje..." required></textarea>
+                    </div>
+
+                    <div class="border-top pt-3 text-end">
+                        <a th:href="@{/mensajeciente/listar(idOrden=${idorden})}" class="btn btn-secondary">
+                            <i class="mdi mdi-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-send"></i> Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

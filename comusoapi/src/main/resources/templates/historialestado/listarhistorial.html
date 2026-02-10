@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Historial de Estados</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="d-md-flex align-items-center">
+                <div>
+                    <h4 class="card-title">Historial de Estados</h4>
+                    <p class="card-subtitle">Seguimiento del progreso de la orden</p>
+                </div>
+                <div class="ms-auto">
+                    <a th:href="@{/historialestado/nuevo(idOrden=${idOrden})}" class="btn btn-success text-white">
+                        <i class="mdi mdi-plus-circle"></i> Nuevo Estado
+                    </a>
+                </div>
+            </div>
 
+            <div class="timeline mt-4" th:each="h : ${listahistorial}">
+                <div class="timeline-item">
+                    <div class="timeline-badge" 
+                         th:class="${h.estadoNuevo == 'COMPLETADO' ? 'bg-success' : (h.estadoNuevo == 'EN_PROGRESO' ? 'bg-warning' : (h.estadoNuevo == 'PENDIENTE' ? 'bg-info' : 'bg-danger'))}">
+                        <i class="mdi mdi-check"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h6 class="timeline-title" th:text="${h.estadoNuevo}"></h6>
+                            <p class="text-muted">
+                                <i class="mdi mdi-calendar"></i> 
+                                <span th:text="${#temporals.format(h.fechaCambio, 'dd/MM/yyyy HH:mm')}"></span>
+                                <span class="ms-3">
+                                    <i class="mdi mdi-account"></i> 
+                                    <span th:text="${h.modificadoPor}"></span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p><strong>Estado Anterior:</strong> <span th:text="${h.estadoAnterior}"></span></p>
+                            <p th:if="${h.observacion}"><strong>Observación:</strong> <span th:text="${h.observacion}"></span></p>
+                        </div>
+                        <div class="timeline-footer">
+                            <a th:href="@{/historialestado/ver/{id}(id=${h.idHistorial})}" class="btn btn-sm btn-info text-white">
+                                <i class="mdi mdi-eye"></i> Ver Detalle
+                            </a>
+                            <a th:href="@{/historialestado/eliminar/{id}(id=${h.idHistorial})}" 
+                               class="btn btn-sm btn-danger" 
+                               onclick="return confirm('¿Seguro que desea eliminar este registro de historial?')">
+                                <i class="mdi mdi-delete"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

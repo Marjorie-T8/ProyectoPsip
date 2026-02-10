@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Nueva Foto de Verificación</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title text-primary">SUBIR FOTO DE VERIFICACIÓN</h4>
+                <hr>
 
+                <form th:action="@{/fotoverificacion/guardar}" method="post" enctype="multipart/form-data" id="formFoto">
+                    <input type="hidden" name="idorden" th:value="${idorden}">
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripción de la Foto</label>
+                        <textarea name="descripcion" class="form-control border-primary" rows="3" 
+                                  placeholder="Describa lo que muestra la foto..." required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Seleccionar Foto</label>
+                        <input type="file" name="archivo" class="form-control border-primary" 
+                               accept="image/*" required onchange="previewImage(event)">
+                    </div>
+
+                    <div class="mb-3">
+                        <img id="imagePreview" class="img-thumbnail" style="display: none; max-width: 300px; max-height: 300px;">
+                    </div>
+
+                    <div class="border-top pt-3 text-end">
+                        <a th:href="@{/fotoverificacion/listar(idOrden=${idorden})}" class="btn btn-secondary">
+                            <i class="mdi mdi-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-upload"></i> Subir Foto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('imagePreview');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    </script>
+</div>
 </body>
 </html>

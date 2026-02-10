@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{plantilla/plantillaui}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Detalle del Historial</title>
 </head>
 <body>
+<div layout:fragment="contenidopaginas">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 class="text-dark">Detalle del Registro de Historial</h3>
+                <hr>
+            </div>
+        </div>
 
+        <div class="row" th:if="${historial != null}">
+            
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
+                        <h6 class="m-0 font-weight-bold text-primary">Cambio de Estado</h6>
+                        <span class="badge p-2" 
+                              th:classappend="${historial.estadoNuevo == 'COMPLETADO' ? 'bg-success text-white' : (historial.estadoNuevo == 'EN_PROGRESO' ? 'bg-warning text-dark' : (historial.estadoNuevo == 'PENDIENTE' ? 'bg-info text-white' : 'bg-danger text-white'))}"
+                              th:text="${historial.estadoNuevo}"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ID Historial</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${historial.idHistorial}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orden Relacionada</div>
+                            <div class="h6 mb-0 text-gray-800">
+                                <i class="mdi mdi-format-list-bulleted"></i> <span th:text="${historial.idOrden}"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Estado Anterior</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${historial.estadoAnterior}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Estado Nuevo</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${historial.estadoNuevo}"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha de Cambio</div>
+                            <div class="h6 mb-0 text-gray-800" th:text="${#temporals.format(historial.fechaCambio, 'dd/MM/yyyy HH:mm')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-header py-3 bg-white">
+                        <h6 class="m-0 font-weight-bold text-info">Información Adicional</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Modificado Por</div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                <i class="mdi mdi-account text-info"></i> 
+                                <span th:text="${historial.modificadoPor}"></span>
+                            </div>
+                        </div>
+                        
+                        <div th:if="${historial.observacion}">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Observación</div>
+                            <div class="h6 mb-0 text-gray-800">
+                                <p class="mb-0" th:text="${historial.observacion}"></p>
+                            </div>
+                        </div>
+                        
+                        <div th:unless="${historial.observacion}" class="text-muted">
+                            <i class="mdi mdi-information-outline"></i> Sin observaciones adicionales.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a th:href="@{/historialestado/listar(idOrden=${historial.idOrden})}" class="btn btn-secondary shadow-sm mx-1">
+                    <i class="mdi mdi-arrow-left"></i> Volver al Listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
