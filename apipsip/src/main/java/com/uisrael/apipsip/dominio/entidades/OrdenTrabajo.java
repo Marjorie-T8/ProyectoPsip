@@ -20,9 +20,10 @@ public class OrdenTrabajo implements Serializable {
 	private final String estado;
 	private final String descripcionTrabajo;
 	private final String observaciones;
+	private final Boolean activo;
 	public OrdenTrabajo(int idOrden, String codigo, int idCliente, int idTecnico, int idTipoServicio, int idEquipo,
 			LocalDate fechaSolicitud, LocalDate fechaCita, LocalTime horaCita, String estado, String descripcionTrabajo,
-			String observaciones) {
+			String observaciones, Boolean activo) {
 		super();
 		this.idOrden = idOrden;
 		this.codigo = codigo;
@@ -36,7 +37,11 @@ public class OrdenTrabajo implements Serializable {
 		this.estado = estado;
 		this.descripcionTrabajo = descripcionTrabajo;
 		this.observaciones = observaciones;
-	}
+		this.activo = activo;
+
+	
+	
+}
 	public int getIdOrden() {
 		return idOrden;
 	}
@@ -73,8 +78,8 @@ public class OrdenTrabajo implements Serializable {
 	public String getObservaciones() {
 		return observaciones;
 	}
-	
-	
+	public Boolean getActivo() {
+		return activo;
+	}
 }
-
 	

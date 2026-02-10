@@ -13,11 +13,14 @@ public class TecnicoJpa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idtecnico")
-	private int idTecnico;
-	private String nombre;
-	private String email;
-	private String telefono;
-	private boolean activo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idtecnico")
+    private int idTecnico;
+    private String nombre;
+    @Column(name = "cedula", unique = true) 
+    private String cedula;
+    private String email;
+    private String telefono;
+    @Column(name = "activo")
+    private Boolean activo = true;
 }

@@ -45,4 +45,5 @@ public class OrdenTrabajoRequestDTO {
     private String descripcionTrabajo;
 
     private String observaciones;
+    private Boolean activo;
 }

@@ -10,5 +10,6 @@ public class TipoServicioRequestDTO {
 	private String nombre;
 	@NotBlank
 	private  String descripcion;
+	private Boolean activo;
 
 }

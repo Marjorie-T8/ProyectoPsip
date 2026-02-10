@@ -42,13 +42,13 @@ public class OrdenTrabajoControlador {
     }
 
     @GetMapping("/{id}")
-    public OrdenTrabajoResponseDTO obtenerPorId(@PathVariable int id) {
-    
-        return mapper.toResponseDto(ordenTrabajoUseCase.obtenerPorId(id));
+    public ResponseEntity<OrdenTrabajoResponseDTO> obtenerPorId(@PathVariable int id) {
+        return ResponseEntity.ok(mapper.toResponseDto(ordenTrabajoUseCase.obtenerPorId(id)));
     }
+
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable int id) {
-       
+    public ResponseEntity<Void> eliminar(@PathVariable int id) {
         ordenTrabajoUseCase.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -3,9 +3,10 @@ package com.uisrael.apipsip.presentacion.dto.response;
 public class TecnicoResponseDTO {
 	private int idTecnico;
 	private  String nombre;
-	private  String email;
+	private String cedula;
+	private  String email;	
 	private String telefono;
-	private boolean activo;
+	private Boolean activo;
 	public int getIdTecnico() {
 		return idTecnico;
 	}
@@ -17,6 +18,12 @@ public class TecnicoResponseDTO {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getCedula() {
+		return cedula;
+	}
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 	public String getEmail() {
 		return email;
@@ -30,12 +37,11 @@ public class TecnicoResponseDTO {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public boolean isActivo() {
+	public Boolean getActivo() {
 		return activo;
 	}
-	public void setActivo(boolean activo) {
+	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
-
-
+	
 }

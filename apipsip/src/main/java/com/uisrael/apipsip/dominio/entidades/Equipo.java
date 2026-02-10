@@ -6,13 +6,15 @@ public class Equipo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idEquipo;
-	private final int idCliente;
+	private final Integer idEquipo;
+	private final Integer idCliente;
 	private final String marca;
 	private final String modelo;
 	private final String numserie;
 	private final String descripcion;
-	public Equipo(int idEquipo, int idCliente, String marca, String modelo, String numserie, String descripcion) {
+	private final Boolean activo;
+	public Equipo(Integer idEquipo, Integer idCliente, String marca, String modelo, String numserie, String descripcion,
+			Boolean activo) {
 		super();
 		this.idEquipo = idEquipo;
 		this.idCliente = idCliente;
@@ -20,11 +22,12 @@ public class Equipo implements Serializable {
 		this.modelo = modelo;
 		this.numserie = numserie;
 		this.descripcion = descripcion;
+		this.activo = activo;
 	}
-	public int getIdEquipo() {
+	public Integer getIdEquipo() {
 		return idEquipo;
 	}
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 	public String getMarca() {
@@ -39,8 +42,10 @@ public class Equipo implements Serializable {
 	public String getDescripcion() {
 		return descripcion;
 	}
-
-
-
+	public Boolean getActivo() {
+		return activo;
+	}
+	
+	
 	
 }

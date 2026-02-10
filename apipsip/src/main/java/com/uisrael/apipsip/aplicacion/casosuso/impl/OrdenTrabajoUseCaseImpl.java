@@ -1,8 +1,10 @@
 package com.uisrael.apipsip.aplicacion.casosuso.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.uisrael.apipsip.aplicacion.casosuso.entradas.IOrdenTrabajoUseCase;
+import com.uisrael.apipsip.aplicacion.excepciones.RecursoDuplicadoException;
 import com.uisrael.apipsip.dominio.entidades.OrdenTrabajo;
 import com.uisrael.apipsip.dominio.repositorios.IOrdenTrabajoRepositorio;
 
@@ -15,10 +17,45 @@ public class OrdenTrabajoUseCaseImpl implements IOrdenTrabajoUseCase {
     }
 
     @Override
-    public OrdenTrabajo crear(OrdenTrabajo ordenTrabajo) {
-        return repositorio.guardar(ordenTrabajo);
-    }
+    public OrdenTrabajo crear(OrdenTrabajo ordenOriginal) {
+       
+        String nuevoCodigo = "OT-" + java.time.LocalDateTime.now()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 
+        
+        OrdenTrabajo ordenParaGuardar = new OrdenTrabajo(
+            ordenOriginal.getIdOrden(),
+            nuevoCodigo,         
+            ordenOriginal.getIdCliente(),
+            ordenOriginal.getIdTecnico(),
+            ordenOriginal.getIdTipoServicio(),
+            ordenOriginal.getIdEquipo(),
+            ordenOriginal.getFechaSolicitud(),
+            ordenOriginal.getFechaCita(),
+            ordenOriginal.getHoraCita(),
+            ordenOriginal.getEstado(),
+            ordenOriginal.getDescripcionTrabajo(),
+            ordenOriginal.getObservaciones(),
+            ordenOriginal.getActivo()
+        );
+
+     
+        return repositorio.guardar(ordenParaGuardar);
+    }
+    @Override
+    public void eliminar(int id) {
+        OrdenTrabajo ex = obtenerPorId(id);
+
+     
+        OrdenTrabajo inactiva = new OrdenTrabajo(
+            ex.getIdOrden(), ex.getCodigo(), ex.getIdCliente(), ex.getIdTecnico(),
+            ex.getIdTipoServicio(), ex.getIdEquipo(), ex.getFechaSolicitud(),
+            ex.getFechaCita(), ex.getHoraCita(), ex.getEstado(),
+            ex.getDescripcionTrabajo(), ex.getObservaciones(), 
+            false 
+        );
+        repositorio.guardar(inactiva);
+    }
     @Override
     public OrdenTrabajo obtenerPorId(int id) {
         return repositorio.buscarPorId(id)
@@ -27,13 +64,11 @@ public class OrdenTrabajoUseCaseImpl implements IOrdenTrabajoUseCase {
 
     @Override
     public List<OrdenTrabajo> listar() {
-        return repositorio.listarTodos();
+        return repositorio.listarTodos().stream()
+                .filter(OrdenTrabajo::getActivo)
+                .collect(Collectors.toList());
     }
-
-    @Override
-    public void eliminar(int id) {
-        repositorio.eliminar(id);
-    }
+   
     @Override
     public OrdenTrabajo actualizar(int id, OrdenTrabajo orden) {
         return repositorio.buscarPorId(id)

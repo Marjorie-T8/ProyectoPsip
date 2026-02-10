@@ -8,16 +8,14 @@ import lombok.Data;
 @Entity
 @Table(name = "tiposervicio")
 public class TipoServicioJpa implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idtipo")
-	private int idTipo;
-
-	@Column(name = "nombre")
-	private String nombre;
-
-	@Column(name = "descripcion")
-	private String descripcion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idtipo")
+    private int idTipo;
+    @Column(name = "nombre", unique = true, nullable = false, length = 100)
+    private String nombre; 
+    private String descripcion;
+    private Boolean activo = true;
 }

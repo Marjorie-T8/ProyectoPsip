@@ -8,19 +8,10 @@ import java.time.LocalTime;
 public class OrdenTrabajoResponseDTO {
 	private int idOrden;
     private String codigo;
-
-    private int idCliente;
-    private String nombreCliente;   
-    
+    private int idCliente;     
     private int idTecnico;
-    private String nombreTecnico;   
-
     private int idTipoServicio;
-    private String nombreTipoServicio; 
-
     private int idEquipo;
-    private String nombreEquipo;   
-
     private LocalDate fechaSolicitud;
     private LocalDate fechaCita;
     private LocalTime horaCita;
@@ -28,6 +19,7 @@ public class OrdenTrabajoResponseDTO {
     private String estado;
     private String descripcionTrabajo;
     private String observaciones;
+    private Boolean activo;
 	public int getIdOrden() {
 		return idOrden;
 	}
@@ -46,23 +38,11 @@ public class OrdenTrabajoResponseDTO {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-	public String getNombreCliente() {
-		return nombreCliente;
-	}
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
-	}
 	public int getIdTecnico() {
 		return idTecnico;
 	}
 	public void setIdTecnico(int idTecnico) {
 		this.idTecnico = idTecnico;
-	}
-	public String getNombreTecnico() {
-		return nombreTecnico;
-	}
-	public void setNombreTecnico(String nombreTecnico) {
-		this.nombreTecnico = nombreTecnico;
 	}
 	public int getIdTipoServicio() {
 		return idTipoServicio;
@@ -70,23 +50,11 @@ public class OrdenTrabajoResponseDTO {
 	public void setIdTipoServicio(int idTipoServicio) {
 		this.idTipoServicio = idTipoServicio;
 	}
-	public String getNombreTipoServicio() {
-		return nombreTipoServicio;
-	}
-	public void setNombreTipoServicio(String nombreTipoServicio) {
-		this.nombreTipoServicio = nombreTipoServicio;
-	}
 	public int getIdEquipo() {
 		return idEquipo;
 	}
 	public void setIdEquipo(int idEquipo) {
 		this.idEquipo = idEquipo;
-	}
-	public String getNombreEquipo() {
-		return nombreEquipo;
-	}
-	public void setNombreEquipo(String nombreEquipo) {
-		this.nombreEquipo = nombreEquipo;
 	}
 	public LocalDate getFechaSolicitud() {
 		return fechaSolicitud;
@@ -124,7 +92,11 @@ public class OrdenTrabajoResponseDTO {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-    
+	public Boolean getActivo() {
+		return activo;
+	}
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
 	
-    
 }

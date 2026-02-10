@@ -2,21 +2,30 @@ package com.uisrael.apipsip.presentacion.dto.response;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ClienteResponseDTO {
 
-	private int idCliente;
+	private Integer idCliente;
 	private String cedula;  
 	private String nombre;
 	private String email; 
 	private  String telefono;
 	private String direccion;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private  LocalDate fechaNacimiento; 
 	private Boolean estado;
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
+	}
+	public String getCedula() {
+		return cedula;
+	}
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 	public String getNombre() {
 		return nombre;
@@ -42,19 +51,17 @@ public class ClienteResponseDTO {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 	public Boolean getEstado() {
 		return estado;
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	public String getCedula() {
-		return cedula;
-	}
-	public LocalDate getFechaNacimiento() {
-		return fechaNacimiento;
-	}
 	
-
-
 }

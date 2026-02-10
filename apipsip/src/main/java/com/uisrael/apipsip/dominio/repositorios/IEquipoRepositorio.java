@@ -14,5 +14,7 @@ public interface IEquipoRepositorio {
 	void eliminar(int id);
 	List<Equipo> listarPorCliente(int idCliente);
 	Equipo actualizar(int id, Equipo equipo);
+
+	Optional<Equipo> buscarPorNumserie(String numserie);
 }
 

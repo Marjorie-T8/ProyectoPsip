@@ -21,8 +21,8 @@ public class ClienteJpa implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name = "idcliente")
-    private int idCliente;
-	@Column(nullable = false, unique = true, length = 20)
+    private Integer idCliente;
+	@Column(nullable = false, unique = true, length = 10)
     private String cedula;
     @Column(length = 80, nullable = false)
     private String nombre;
@@ -30,7 +30,7 @@ public class ClienteJpa implements Serializable{
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String telefono;
 
     @Column(nullable = false)

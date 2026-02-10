@@ -42,14 +42,9 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
                 .toList();
     }
 
+    
     @Override
-    public void eliminar(int id) {
-        jpaRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Equipo> listarPorCliente(int idCliente) {
-       
+    public List<Equipo> listarPorCliente(int idCliente) {      
         return jpaRepository.findByIdCliente(idCliente) 
                 .stream()
                 .map(entityMapper::toDomain)
@@ -62,5 +57,17 @@ public class EquipoRepositorioImpl implements IEquipoRepositorio {
         entity.setIdEquipo(id); 
         return entityMapper.toDomain(jpaRepository.save(entity));
     }
-    
+
+    @Override
+
+    public void eliminar(int id) {
+       jpaRepository.deleteById(id); 
+    }
+
+    @Override
+   
+    public Optional<Equipo> buscarPorNumserie(String numserie) {
+        return jpaRepository.findByNumserie(numserie)
+                .map(entityMapper::toDomain);
+    }
 }

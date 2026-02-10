@@ -17,7 +17,7 @@ public class OrdenTrabajoJpa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idorden")
     private int idOrden;
-
+	@Column(name = "codigo", unique = true)
     private String codigo;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,5 +63,7 @@ public class OrdenTrabajoJpa implements Serializable {
     private String descripcionTrabajo;
 
     private String observaciones;
+    @Column(name = "activo")
+    private Boolean activo = true;
 }
 	

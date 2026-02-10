@@ -46,4 +46,9 @@ public class OrdenTrabajoRepositorioImpl implements IOrdenTrabajoRepositorio {
     public void eliminar(int id) {
         jpaRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<OrdenTrabajo> buscarPorCodigo(String codigo) {
+        return jpaRepository.findByCodigo(codigo).map(entityMapper::toDomain);
+    }
 }
