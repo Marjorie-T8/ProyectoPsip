@@ -1,6 +1,7 @@
 package com.uisrael.apipsip.infraestructura.presistencia.jpa;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,13 +14,16 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
+
+
 public class ClienteJpa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "idcliente") 
-    private int idcliente;
-
+	 @Column(name = "idcliente")
+    private int idCliente;
+	@Column(nullable = false, unique = true, length = 20)
+    private String cedula;
     @Column(length = 80, nullable = false)
     private String nombre;
 
@@ -31,6 +35,8 @@ public class ClienteJpa implements Serializable{
 
     @Column(nullable = false)
     private String direccion;
+    @Column(name = "fechanacimiento")
+    private LocalDate fechaNacimiento;
 
     private Boolean estado= true; 
 }

@@ -1,19 +1,22 @@
 package com.uisrael.apipsip.presentacion.dto.response;
 
+import java.time.LocalDate;
 
 public class ClienteResponseDTO {
 
-	private int idcliente;
+	private int idCliente;
+	private String cedula;  
 	private String nombre;
 	private String email; 
 	private  String telefono;
 	private String direccion;
+	private  LocalDate fechaNacimiento; 
 	private Boolean estado;
-	public int getIdcliente() {
-		return idcliente;
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setIdcliente(int idcliente) {
-		this.idcliente = idcliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 	public String getNombre() {
 		return nombre;
@@ -44,6 +47,12 @@ public class ClienteResponseDTO {
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+	public String getCedula() {
+		return cedula;
+	}
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 	
 

@@ -45,9 +45,7 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	public void eliminar(int id) {
 		jpaRepository.deleteById(id);
 		
-	}
-	
-
+	}	
 	@Override
 	public Cliente actualizar(int id, Cliente cliente) {
 	    
@@ -59,4 +57,11 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	    return entityMapper.toDomain(guardado);
 	}
 
+	@Override
+
+	public Optional<Cliente> buscarPorCedula(String cedula) {
+	
+	    return jpaRepository.findByCedula(cedula)
+	                        .map(entityMapper::toDomain);
+	}
 }

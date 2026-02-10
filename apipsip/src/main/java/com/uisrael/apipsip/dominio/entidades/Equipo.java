@@ -6,32 +6,26 @@ public class Equipo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final int idequipo;
-	private final int idcliente;
-	private final String tipo;
+	private final int idEquipo;
+	private final int idCliente;
 	private final String marca;
 	private final String modelo;
 	private final String numserie;
-	private final String estadoequipo;
-	public Equipo(int idequipo, int idcliente, String tipo, String marca, String modelo, String numserie,
-			String estadoequipo) {
+	private final String descripcion;
+	public Equipo(int idEquipo, int idCliente, String marca, String modelo, String numserie, String descripcion) {
 		super();
-		this.idequipo = idequipo;
-		this.idcliente = idcliente;
-		this.tipo = tipo;
+		this.idEquipo = idEquipo;
+		this.idCliente = idCliente;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.numserie = numserie;
-		this.estadoequipo = estadoequipo;
+		this.descripcion = descripcion;
 	}
-	public int getIdequipo() {
-		return idequipo;
+	public int getIdEquipo() {
+		return idEquipo;
 	}
-	public int getIdcliente() {
-		return idcliente;
-	}
-	public String getTipo() {
-		return tipo;
+	public int getIdCliente() {
+		return idCliente;
 	}
 	public String getMarca() {
 		return marca;
@@ -42,11 +36,11 @@ public class Equipo implements Serializable {
 	public String getNumserie() {
 		return numserie;
 	}
-	public String getEstadoequipo() {
-		return estadoequipo;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	
+
+
+
 	
 }
-
-

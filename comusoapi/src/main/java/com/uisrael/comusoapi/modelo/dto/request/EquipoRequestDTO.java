@@ -6,16 +6,13 @@ import lombok.Data;
 
 @Data
 public class EquipoRequestDTO {
-	
-	 private int idequipo; 
-	    @JsonProperty("idcliente")
-	    private int idcliente;   
-	    private String tipo; 
-	    private String marca;	  
-	    private String modelo;
-	    @JsonProperty("numserie")
-	    private String numserie;    
-	    private String estadoequipo; 
-	}
+	private int idEquipo;
+	@JsonProperty("idcliente")
+    private int idCliente;
+	private  String marca;
+	private  String modelo;
+	@JsonProperty("numserie")
+	private  String numserie;
+	private String descripcion;
 
-
+}
